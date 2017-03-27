@@ -1,75 +1,88 @@
 package com.ruo.player.adapter;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.media.Image;
-import android.view.LayoutInflater;
+import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.ruo.player.R;
-import com.ruo.player.entries.MovieModel;
+import com.ruo.player.views.MediaDisplayView;
 
 import java.util.List;
 
-public class ImageAdapter extends BaseAdapter {
+public class ImageAdapter extends PagerAdapter {
 
-    private LayoutInflater mLayoutinflater;
-    private List<MovieModel> mDatas;
+    private List<MediaDisplayView> mViews;
 
-    public ImageAdapter(Context context, List<MovieModel> mDatas) {
-        mLayoutinflater = LayoutInflater.from(context);
-        this.mDatas = mDatas;
+    public ImageAdapter(List<MediaDisplayView> mViews) {
+        this.mViews = mViews;
     }
 
     @Override
     public int getCount() {
-        return mDatas.size();
+        return mViews.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        return mDatas.get(position);
+    public boolean isViewFromObject(View view, Object object) {
+        return view == object;
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public Object instantiateItem(ViewGroup container, int position) {
+        MediaDisplayView displayView = mViews.get(position);
+        container.addView(displayView);
+        return displayView;
     }
+
+
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        CoverViewHolder coverViewHolder = null;
-        if (convertView == null) {
-            convertView = mLayoutinflater.inflate(R.layout.item_launcher, parent, false);
-            coverViewHolder = new CoverViewHolder(convertView);
-            convertView.setTag(coverViewHolder);
-        } else {
-            coverViewHolder = (CoverViewHolder) convertView.getTag();
-        }
-        Bitmap thumbnail = mDatas.get(position).getThumbnail();
-        coverViewHolder.coverView.setImageBitmap(thumbnail);
-        coverViewHolder.titleView.setText(mDatas.get(position).getMovieName());
-        return convertView;
-    }
-
-
-    class CoverViewHolder {
-
-        public ImageView coverView;
-        public TextView titleView;
-
-        public CoverViewHolder(View rootView) {
-            coverView = (ImageView) rootView.findViewById(R.id.launcher_cover);
-            titleView = (TextView) rootView.findViewById(R.id.launcher_title);
-        }
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        MediaDisplayView displayView = mViews.get(position);
+        container.removeView(displayView);
     }
 
     /**
-     * 创建带有倒影的图片
+     @Override public int getCount() {
+     return mDatas.size();
+     }
+
+     @Override public Object getItem(int position) {
+     return mDatas.get(position);
+     }
+
+     @Override public long getItemId(int position) {
+     return position;
+     }
+
+     @Override public View getView(int position, View convertView, ViewGroup parent) {
+     CoverViewHolder coverViewHolder = null;
+     if (convertView == null) {
+     convertView = mLayoutinflater.inflate(R.layout.item_launcher, parent, false);
+     coverViewHolder = new CoverViewHolder(convertView);
+     convertView.setTag(coverViewHolder);
+     } else {
+     coverViewHolder = (CoverViewHolder) convertView.getTag();
+     }
+     Bitmap thumbnail = mDatas.get(position).getThumbnail();
+     coverViewHolder.coverView.setImageBitmap(thumbnail);
+     coverViewHolder.titleView.setText(mDatas.get(position).getMovieName());
+     return convertView;
+     }
+
+
+     class CoverViewHolder {
+
+     public ImageView coverView;
+     public TextView titleView;
+
+     public CoverViewHolder(View rootView) {
+     coverView = (ImageView) rootView.findViewById(R.id.launcher_cover);
+     titleView = (TextView) rootView.findViewById(R.id.launcher_title);
+     }
+     }
+
+
+     创建带有倒影的图片
 
      public void createRefectedBitmap() {
      //原图片与倒影图片之间的距离

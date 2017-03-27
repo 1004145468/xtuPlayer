@@ -30,6 +30,8 @@ public class MediaUtils {
         }
         cursor.moveToFirst();
         ArrayList<MovieModel> mDatas = new ArrayList<>();
+        int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
+        int screenHeight = context.getResources().getDisplayMetrics().heightPixels;
         MovieModel model = null;
         do {
             String title = cursor.getString(cursor.getColumnIndex(projections[0]));      //视频标题
@@ -37,7 +39,7 @@ public class MediaUtils {
             int audioType = cursor.getInt(cursor.getColumnIndex(projections[2]));  // 视频类型
             long totalfilesize = cursor.getLong(cursor.getColumnIndex(projections[3]));
             String fileSize = Formatter.formatFileSize(context, totalfilesize);    //视频大小
-            model = new MovieModel(title, filePath, fileSize, audioType);
+            model = new MovieModel(screenWidth,screenHeight,title, filePath, fileSize, audioType);
             mDatas.add(model);
         } while (cursor.moveToNext());
         return mDatas;

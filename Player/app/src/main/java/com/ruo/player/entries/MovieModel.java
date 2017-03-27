@@ -15,19 +15,18 @@ import java.lang.ref.SoftReference;
 
 public class MovieModel {
 
-    private SoftReference<Bitmap> bitmapSoftReference;   //视频省略图
     private String movieName; //视频名称
     private String filePath;  // 视频路径
     private String fileSize;  // 视频大小
     private int movieType;  //视频类型
+    private final Bitmap bitmap; //视频省略图
 
-    public MovieModel(String movieName, String filePath, String fileSize, int movieType) {
+    public MovieModel(int width, int height, String movieName, String filePath, String fileSize, int movieType) {
         this.movieName = movieName;
         this.filePath = filePath;
         this.fileSize = fileSize;
         this.movieType = movieType;
-        Bitmap bitmap = BitmapUtils.getVideoThumbnail(filePath,1200,600, MediaStore.Video.Thumbnails.MINI_KIND);
-        bitmapSoftReference = new SoftReference<>(bitmap);
+        bitmap = BitmapUtils.getVideoThumbnail(filePath, width, height, MediaStore.Video.Thumbnails.MINI_KIND);
     }
 
     public String getMovieName() {
@@ -62,11 +61,7 @@ public class MovieModel {
         this.movieType = movieType;
     }
 
-    public Bitmap getThumbnail(){
-       if(bitmapSoftReference == null){
-            Bitmap bitmap = BitmapUtils.getVideoThumbnail(filePath,1200,600, MediaStore.Video.Thumbnails.MINI_KIND);
-            bitmapSoftReference = new SoftReference<>(bitmap);
-        }
-        return bitmapSoftReference.get();
+    public Bitmap getThumbnail() {
+        return bitmap;
     }
 }
