@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ruo.player.R;
+import com.ruo.player.Utils.PLGT;
 import com.ruo.player.base.BaseViewHolder;
 import com.ruo.player.entries.MovieModel;
 
@@ -52,6 +53,8 @@ public class LauncherListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     class LauncherListHolder extends BaseViewHolder {
 
+        private MovieModel movieModel;
+
         @BindView(R.id.launcherlist_img)
         ImageView imgView;
         @BindView(R.id.launcherlist_title)
@@ -70,7 +73,7 @@ public class LauncherListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             if (obj == null) {
                 return;
             }
-            MovieModel movieModel = (MovieModel) obj;
+            movieModel = (MovieModel) obj;
             imgView.setImageBitmap(movieModel.getThumbnail());
             titleView.setText(movieModel.getMovieName());
             sizeView.setText(movieModel.getFileSize());
@@ -79,8 +82,7 @@ public class LauncherListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @OnClick(R.id.launcher_root)
         public void onItemClick() {
-
-            Toast.makeText(mContext, "Adapter item.....", Toast.LENGTH_SHORT).show();
+            PLGT.gotoMediaPlayActivity(mContext, movieModel.getFilePath());
         }
     }
 }

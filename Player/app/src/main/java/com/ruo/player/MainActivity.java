@@ -11,9 +11,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ruo.player.Utils.DialogUtils;
 import com.ruo.player.Utils.MediaUtils;
+import com.ruo.player.Utils.PLGT;
 import com.ruo.player.adapter.LauncherImageAdapter;
 import com.ruo.player.adapter.LauncherListAdapter;
 import com.ruo.player.base.BaseActivity;
@@ -29,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener, MediaDisplayView.OnBtnOnclickListener{
+public class MainActivity extends BaseActivity implements ViewPager.OnPageChangeListener, MediaDisplayView.OnBtnOnclickListener {
 
     private static final String TAG = "MainActivity";
 
@@ -41,6 +43,9 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
 
     @BindView(R.id.launcher_pager)
     ViewPager mViewPager;
+
+    @BindView(R.id.media_title)
+    TextView mTitleView;
 
     @BindView(R.id.launcher_recyclerview)
     RecyclerView mRecyclerView;
@@ -156,11 +161,19 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
     }
 
+    @Override
+    public void onItemClick() {
+        int currentIndex = mViewPager.getCurrentItem();
+        String filePath = mDatas.get(currentIndex).getFilePath();
+        PLGT.gotoMediaPlayActivity(this, filePath);
+    }
+
     @OnClick(R.id.launchertype_bigpic)
     public void changeBigPicType() {
         mBigPicTypeView.setVisibility(View.GONE);
         mListTypeView.setVisibility(View.VISIBLE);
         mViewPager.setVisibility(View.VISIBLE);
+        mTitleView.setVisibility(View.GONE);
         mRecyclerView.setVisibility(View.GONE);
     }
 
@@ -168,6 +181,7 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     public void changeListType() {
         mListTypeView.setVisibility(View.GONE);
         mBigPicTypeView.setVisibility(View.VISIBLE);
+        mTitleView.setVisibility(View.VISIBLE);
         mRecyclerView.setVisibility(View.VISIBLE);
         mViewPager.setVisibility(View.GONE);
     }

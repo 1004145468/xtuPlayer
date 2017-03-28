@@ -26,7 +26,7 @@ public class MovieModel {
         this.filePath = filePath;
         this.fileSize = fileSize;
         this.movieType = movieType;
-        bitmap = BitmapUtils.getVideoThumbnail(filePath, width, height, MediaStore.Video.Thumbnails.MINI_KIND);
+        bitmap = BitmapUtils.getVideoThumbnail(filePath, width, height, MediaStore.Video.Thumbnails.FULL_SCREEN_KIND);
     }
 
     public String getMovieName() {

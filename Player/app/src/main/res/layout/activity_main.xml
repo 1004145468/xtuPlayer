@@ -16,26 +16,38 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:visibility="gone"
+        android:layout_marginTop="55dp"/>
+
+    <TextView
+        android:id="@+id/media_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="18sp"
+        android:textColor="@color/color1"
+        android:background="@color/lightgreen"
+        android:gravity="center"
+        android:text="@string/localmedialist"
         android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/launchertype_list"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_gravity="right"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="right|bottom"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="60dp"
         android:src="@drawable/launcher_menu"
 
         />
 
     <ImageView
         android:id="@+id/launchertype_bigpic"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_gravity="right"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="right|bottom"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="60dp"
         android:src="@drawable/launcher_bigpic"
         android:visibility="gone"
         />
@@ -44,6 +56,7 @@
         android:id="@+id/launcher_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="centerInside"
         android:src="@drawable/default_message_empty"
         />
 

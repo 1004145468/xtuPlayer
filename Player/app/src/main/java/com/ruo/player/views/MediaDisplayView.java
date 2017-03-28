@@ -54,9 +54,11 @@ public class MediaDisplayView extends FrameLayout {
         mForwardView.setVisibility(visiable ? VISIBLE : GONE);
     }
 
-    @OnClick(R.id.mediadisplay_root)
+    @OnClick(R.id.mediadisplay_play)
     public void onItemClick(){
-        DialogUtils.showToast(getContext(),"ViewPager item Click....");
+        if (mListener != null) {
+            mListener.onItemClick();
+        }
     }
 
     @OnClick(R.id.launcher_back)
@@ -76,6 +78,7 @@ public class MediaDisplayView extends FrameLayout {
     public interface OnBtnOnclickListener {
         void onBackBtnClick();
         void onForwardBtnClick();
+        void onItemClick();
     }
 
     private OnBtnOnclickListener mListener;
