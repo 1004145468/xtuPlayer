@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 24
@@ -30,4 +31,6 @@ dependencies {
     compile 'tv.danmaku.ijk.media:ijkplayer-java:0.7.8.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.7.8.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.7.8.1'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }

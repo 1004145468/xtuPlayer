@@ -17,10 +17,11 @@ public class Transformer3D implements ViewPager.PageTransformer {
         if (position < -1 || position > 1) {
             page.setRotationY(0);
         } else {
-            page.setPivotX(page.getMeasuredWidth() / 2);
+            page.setPivotX(page.getMeasuredWidth());
             page.setPivotY(page.getMeasuredHeight() / 2);
-            page.setRotationY(maxRotate * position);
+           // page.setRotationY(maxRotate * position);
             page.setScaleX(1- Math.abs(position) * 0.5f);
+            page.setScaleY(1- Math.abs(position) * 0.5f);
            // page.setScaleY(1- Math.abs(position) * 0.5f);
         }
     }
