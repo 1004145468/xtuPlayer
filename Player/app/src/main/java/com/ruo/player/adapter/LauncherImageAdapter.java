@@ -8,11 +8,11 @@ import com.ruo.player.views.MediaDisplayView;
 
 import java.util.List;
 
-public class ImageAdapter extends PagerAdapter {
+public class LauncherImageAdapter extends PagerAdapter {
 
     private List<MediaDisplayView> mViews;
 
-    public ImageAdapter(List<MediaDisplayView> mViews) {
+    public LauncherImageAdapter(List<MediaDisplayView> mViews) {
         this.mViews = mViews;
     }
 
@@ -57,7 +57,7 @@ public class ImageAdapter extends PagerAdapter {
      @Override public View getView(int position, View convertView, ViewGroup parent) {
      CoverViewHolder coverViewHolder = null;
      if (convertView == null) {
-     convertView = mLayoutinflater.inflate(R.layout.item_launcher, parent, false);
+     convertView = mLayoutinflater.inflate(R.layout.view_mediadisplay, parent, false);
      coverViewHolder = new CoverViewHolder(convertView);
      convertView.setTag(coverViewHolder);
      } else {

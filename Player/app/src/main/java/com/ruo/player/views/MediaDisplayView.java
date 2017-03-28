@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ruo.player.R;
+import com.ruo.player.Utils.DialogUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +32,7 @@ public class MediaDisplayView extends FrameLayout {
 
     public MediaDisplayView(Context context) {
         super(context);
-        View rootView = LayoutInflater.from(context).inflate(R.layout.item_launcher, this, true);//内填充
+        View rootView = LayoutInflater.from(context).inflate(R.layout.view_mediadisplay, this, true);//内填充
         ButterKnife.bind(this, rootView);
         mCoverView = (ImageView) rootView.findViewById(R.id.launcher_cover);
         mTitleView = (TextView) rootView.findViewById(R.id.launcher_title);
@@ -51,6 +52,11 @@ public class MediaDisplayView extends FrameLayout {
 
     public void setForwardViewVisiable(boolean visiable) {
         mForwardView.setVisibility(visiable ? VISIBLE : GONE);
+    }
+
+    @OnClick(R.id.mediadisplay_root)
+    public void onItemClick(){
+        DialogUtils.showToast(getContext(),"ViewPager item Click....");
     }
 
     @OnClick(R.id.launcher_back)
