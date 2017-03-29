@@ -3,6 +3,7 @@ package com.ruo.player;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.media.AudioManager;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -71,6 +73,9 @@ public class MediaPlayActivity extends BaseActivity {
     private boolean showController = false;
     private boolean lockScreen = false;
 
+    private AudioManager mAudioManager;
+    private int mMaxAudioVoice;
+
     private Handler TimerHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -95,6 +100,8 @@ public class MediaPlayActivity extends BaseActivity {
     private void initConfig() {
         mScreenWidth = getResources().getDisplayMetrics().widthPixels;
         mScreenHeight = getResources().getDisplayMetrics().heightPixels;
+        mAudioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+        mMaxAudioVoice = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         mGestureDetector = new GestureDetector(this, new VideoGestureListener());
     }
 
@@ -168,6 +175,7 @@ public class MediaPlayActivity extends BaseActivity {
             public void onStartTrackingTouch(SeekBar seekBar) {
                 pausePlay();
             }
+
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 startPlay();
@@ -175,9 +183,9 @@ public class MediaPlayActivity extends BaseActivity {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if(fromUser){
+                if (fromUser) {
                     mVideoView.seekTo(progress);
-                    displayFormatTime(mCurrentTimeView,progress);
+                    displayFormatTime(mCurrentTimeView, progress);
                 }
             }
         });
@@ -202,11 +210,11 @@ public class MediaPlayActivity extends BaseActivity {
     }
 
     @OnClick(R.id.media_lockorunlock)
-    public void lockOrunLockScreen(){
+    public void lockOrunLockScreen() {
         lockScreen = !lockScreen;
-        if(lockScreen){
+        if (lockScreen) {
             mLockorUnLockView.setImageResource(R.drawable.select_lock);
-        }else{
+        } else {
             mLockorUnLockView.setImageResource(R.drawable.select_unlock);
         }
     }
@@ -259,21 +267,49 @@ public class MediaPlayActivity extends BaseActivity {
     }
 
     /**
-     *  调节播放进度
+     * 调节播放声音
+     *
      * @param percent
      */
-    private void adjustVoice(float percent){
-
+    private void adjustVoice(float percent) {
+        int currentVoice = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        currentVoice = (int) (currentVoice + percent * mMaxAudioVoice * 3);
+        if (currentVoice > mMaxAudioVoice) {
+            currentVoice = mMaxAudioVoice;
+        }
+        if (currentVoice < 0) {
+            currentVoice = 0;
+        }
+        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVoice, 0);
+        Log.d(TAG, "adjustVoice: " + currentVoice);
     }
 
     /**
      * 调整屏幕亮度
+     *
      * @param percent
      */
-    private void adjustBrissness(float percent){
-
+    private void adjustBrissness(float percent) {
+        WindowManager.LayoutParams attributes = getWindow().getAttributes();
+        float currentBrightness = attributes.screenBrightness + percent * 3;
+        if(currentBrightness < 0.01){
+            currentBrightness = 0.01f;
+        }
+        if(currentBrightness > 1){
+            currentBrightness = 1;
+        }
+        attributes.screenBrightness = currentBrightness;
+        getWindow().setAttributes(attributes);
     }
 
+    /**
+     * 调整播放进度
+     *
+     * @param percent
+     */
+    private void adjustVideoProgress(float percent) {
+
+    }
 
 
     class VideoGestureListener extends GestureDetector.SimpleOnGestureListener {
@@ -286,21 +322,22 @@ public class MediaPlayActivity extends BaseActivity {
             if (Math.abs(deltaX) > ADJUST_GAP) {
                 Log.d(TAG, "onScroll: 调整进度。。。");
             } else if (Math.abs(deltaY) > ADJUST_GAP) {
+                float percentY = deltaY / mScreenHeight;
                 if (startX < mScreenWidth / 2) {  //调整亮度
-                    Log.d(TAG, "onScroll: 调整亮度。。。。。");
+                   adjustBrissness(percentY);
                 } else if (startX > mScreenWidth / 2) {
-                    Log.d(TAG, "onScroll: 调整音量....");
+                    adjustVoice(percentY);
                 }
             }
             return false;
         }
 
         @Override
-        public boolean onDown(MotionEvent e) {
+        public boolean onDoubleTap(MotionEvent e) {
             if (showController) {
                 topOutAnim.start();
                 bottonOutAnim.start();
-            } else if(!lockScreen){
+            } else if (!lockScreen) {
                 topEnterAnim.start();
                 bottonEnterAnim.start();
             }
