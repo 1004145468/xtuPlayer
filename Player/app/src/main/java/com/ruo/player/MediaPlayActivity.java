@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -60,6 +61,10 @@ public class MediaPlayActivity extends BaseActivity {
     ImageView mScreenCotrollerView;
     @BindView(R.id.media_controller)
     View mControllerView;
+    @BindView(R.id.media_centerIcon)
+    ImageView mCenterIconView;
+    @BindView(R.id.media_centerprogress)
+    ProgressBar mCenterProgressView;
 
     private int mScreenWidth = 0;
     private int mScreenHeight = 0;
@@ -286,8 +291,10 @@ public class MediaPlayActivity extends BaseActivity {
      * @param percent
      */
     private void adjustVoice(float percent) {
-        int currentVoice = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        currentVoice = (int) (currentVoice + percent * mMaxAudioVoice * 3);
+        mCenterIconView.setImageResource(R.drawable.voice);
+        mCenterProgressView.setMax(mMaxAudioVoice);
+        int currentVoice = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+        currentVoice = (int) (currentVoice + percent * mMaxAudioVoice);
         if (currentVoice > mMaxAudioVoice) {
             currentVoice = mMaxAudioVoice;
         }
@@ -295,7 +302,7 @@ public class MediaPlayActivity extends BaseActivity {
             currentVoice = 0;
         }
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVoice, 0);
-        Log.d(TAG, "adjustVoice: " + currentVoice);
+        mCenterProgressView.setProgress(currentVoice);
     }
 
     /**
@@ -304,8 +311,10 @@ public class MediaPlayActivity extends BaseActivity {
      * @param percent
      */
     private void adjustBrissness(float percent) {
+        mCenterIconView.setImageResource(R.drawable.brightness);
+        mCenterProgressView.setMax(1000);
         WindowManager.LayoutParams attributes = getWindow().getAttributes();
-        float currentBrightness = attributes.screenBrightness + percent * 3;
+        float currentBrightness = attributes.screenBrightness + percent;
         if (currentBrightness < 0.01) {
             currentBrightness = 0.01f;
         }
@@ -314,6 +323,7 @@ public class MediaPlayActivity extends BaseActivity {
         }
         attributes.screenBrightness = currentBrightness;
         getWindow().setAttributes(attributes);
+        mCenterProgressView.setProgress((int) (currentBrightness * 1000));
     }
 
     /**
