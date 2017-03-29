@@ -20,6 +20,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.ruo.player.Utils.DensityUtils;
+import com.ruo.player.Utils.DialogUtils;
 import com.ruo.player.base.BaseActivity;
 import com.ruo.player.media.IRenderView;
 import com.ruo.player.media.IjkVideoView;
@@ -168,6 +169,19 @@ public class MediaPlayActivity extends BaseActivity {
                 TimerHandler.sendEmptyMessage(UPDATE_UI);
             }
         });
+        mVideoView.setOnCompletionListener(new IMediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(IMediaPlayer iMediaPlayer) {
+                pausePlay();
+            }
+        });
+        mVideoView.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(IMediaPlayer iMediaPlayer, int i, int i1) {
+                DialogUtils.showToast(MediaPlayActivity.this,getString(R.string.play_error));
+                return false;
+            }
+        });
 
         //ProgressSeekBar
         mProgressView.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -292,10 +306,10 @@ public class MediaPlayActivity extends BaseActivity {
     private void adjustBrissness(float percent) {
         WindowManager.LayoutParams attributes = getWindow().getAttributes();
         float currentBrightness = attributes.screenBrightness + percent * 3;
-        if(currentBrightness < 0.01){
+        if (currentBrightness < 0.01) {
             currentBrightness = 0.01f;
         }
-        if(currentBrightness > 1){
+        if (currentBrightness > 1) {
             currentBrightness = 1;
         }
         attributes.screenBrightness = currentBrightness;
@@ -308,7 +322,18 @@ public class MediaPlayActivity extends BaseActivity {
      * @param percent
      */
     private void adjustVideoProgress(float percent) {
-
+        pausePlay();
+        int videototaltime = mVideoView.getDuration();
+        int currentTime = mVideoView.getCurrentPosition();
+        currentTime = (int) (currentTime + videototaltime * percent);
+        if(currentTime > videototaltime){
+            currentTime = videototaltime;
+        }
+        if(currentTime < 0){
+            currentTime = 0;
+        }
+        mVideoView.seekTo(currentTime);
+        startPlay();
     }
 
 
@@ -320,11 +345,12 @@ public class MediaPlayActivity extends BaseActivity {
             float deltaX = e2.getX() - startX;
             float deltaY = e2.getY() - startY;
             if (Math.abs(deltaX) > ADJUST_GAP) {
-                Log.d(TAG, "onScroll: 调整进度。。。");
+                float percentX = deltaX / mScreenWidth;
+                adjustVideoProgress(percentX);
             } else if (Math.abs(deltaY) > ADJUST_GAP) {
                 float percentY = deltaY / mScreenHeight;
                 if (startX < mScreenWidth / 2) {  //调整亮度
-                   adjustBrissness(percentY);
+                    adjustBrissness(percentY);
                 } else if (startX > mScreenWidth / 2) {
                     adjustVoice(percentY);
                 }

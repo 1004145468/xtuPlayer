@@ -2,4 +2,5 @@
     <string name="app_name">Player</string>
     <string name="readsdcard_permission_fail">取消授权，读取本地视频失败！</string>
     <string name="localmedialist">本地视频</string>
+    <string name="play_error">视频播放失败！</string>
 </resources>
