@@ -13,9 +13,10 @@ import com.ruo.player.MediaPlayActivity;
 public class PLGT {
 
     //跳转进行媒体的播放
-    public static void gotoMediaPlayActivity(Context context, String filePath) {
+    public static void gotoMediaPlayActivity(Context context, String fileName ,String filePath) {
         if (context instanceof Activity) {
             Intent intent = new Intent(context, MediaPlayActivity.class);
+            intent.putExtra("mediaName", fileName);
             intent.putExtra("mediaPath", filePath);
             context.startActivity(intent);
         }

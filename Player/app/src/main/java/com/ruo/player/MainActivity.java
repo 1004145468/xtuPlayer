@@ -65,11 +65,6 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         int grantResult = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
         if (grantResult != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READSTORAGE_CODE);
@@ -164,8 +159,8 @@ public class MainActivity extends BaseActivity implements ViewPager.OnPageChange
     @Override
     public void onItemClick() {
         int currentIndex = mViewPager.getCurrentItem();
-        String filePath = mDatas.get(currentIndex).getFilePath();
-        PLGT.gotoMediaPlayActivity(this, filePath);
+        MovieModel movieModel = mDatas.get(currentIndex);
+        PLGT.gotoMediaPlayActivity(this, movieModel.getMovieName(),movieModel.getFilePath());
     }
 
     @OnClick(R.id.launchertype_bigpic)

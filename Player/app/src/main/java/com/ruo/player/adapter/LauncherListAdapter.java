@@ -82,7 +82,7 @@ public class LauncherListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @OnClick(R.id.launcher_root)
         public void onItemClick() {
-            PLGT.gotoMediaPlayActivity(mContext, movieModel.getFilePath());
+            PLGT.gotoMediaPlayActivity(mContext, movieModel.getMovieName(), movieModel.getFilePath());
         }
     }
 }

@@ -1,13 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color4">
 
     <com.ruo.player.media.IjkVideoView
-        android:id="@+id/view_mediaplayer"
+        android:id="@+id/media_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+    
+    <TextView
+        android:id="@+id/media_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/color5"
+        android:gravity="center"
+        android:textColor="@color/color6"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/media_lockorunlock"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/select_unlock"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"/>
+
+    <LinearLayout
+        android:id="@+id/media_controller"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <SeekBar
+            android:id="@+id/media_progress"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <ImageView
+                android:id="@+id/media_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/select_play" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/media_currenttime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:textColor="@color/color6"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="/"
+                android:textColor="@color/color6"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/media_totaltime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:textColor="@color/color6"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/media_screencontroller"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/select_fullscreen" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>
