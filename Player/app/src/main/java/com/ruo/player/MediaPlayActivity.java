@@ -3,12 +3,14 @@ package com.ruo.player;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.app.ActivityManager;
 import android.media.AudioManager;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityManagerCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -39,6 +41,7 @@ public class MediaPlayActivity extends BaseActivity {
 
     private static final String TAG = "MediaPlayActivity";
     private static final int UPDATE_UI = 0x110;
+    private static final int HIDE_VIEW = 0x111;
 
 
     private final int ADJUST_GAP = 54;
@@ -65,6 +68,8 @@ public class MediaPlayActivity extends BaseActivity {
     ImageView mCenterIconView;
     @BindView(R.id.media_centerprogress)
     ProgressBar mCenterProgressView;
+    @BindView(R.id.media_centeradjust)
+    View mCenterAdjustView;
 
     private int mScreenWidth = 0;
     private int mScreenHeight = 0;
@@ -85,10 +90,18 @@ public class MediaPlayActivity extends BaseActivity {
     private Handler TimerHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            int currenttime = mVideoView.getCurrentPosition();
-            mProgressView.setProgress(currenttime);
-            displayFormatTime(mCurrentTimeView, currenttime);
-            TimerHandler.sendEmptyMessageDelayed(UPDATE_UI, 500);
+            switch(msg.what)
+            {
+                case UPDATE_UI:
+                    int currenttime = mVideoView.getCurrentPosition();
+                    mProgressView.setProgress(currenttime);
+                    displayFormatTime(mCurrentTimeView, currenttime);
+                    TimerHandler.sendEmptyMessageDelayed(UPDATE_UI, 500);
+                    break;
+                case HIDE_VIEW:
+                    mCenterAdjustView.setVisibility(View.INVISIBLE);
+                    break;
+            }
         }
     };
 
@@ -291,6 +304,8 @@ public class MediaPlayActivity extends BaseActivity {
      * @param percent
      */
     private void adjustVoice(float percent) {
+        TimerHandler.removeMessages(HIDE_VIEW);
+        mCenterAdjustView.setVisibility(View.VISIBLE);
         mCenterIconView.setImageResource(R.drawable.voice);
         mCenterProgressView.setMax(mMaxAudioVoice);
         int currentVoice = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
@@ -303,6 +318,7 @@ public class MediaPlayActivity extends BaseActivity {
         }
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVoice, 0);
         mCenterProgressView.setProgress(currentVoice);
+        TimerHandler.sendEmptyMessageDelayed(HIDE_VIEW,800);
     }
 
     /**
@@ -311,6 +327,8 @@ public class MediaPlayActivity extends BaseActivity {
      * @param percent
      */
     private void adjustBrissness(float percent) {
+        TimerHandler.removeMessages(HIDE_VIEW);
+        mCenterAdjustView.setVisibility(View.VISIBLE);
         mCenterIconView.setImageResource(R.drawable.brightness);
         mCenterProgressView.setMax(1000);
         WindowManager.LayoutParams attributes = getWindow().getAttributes();
@@ -324,6 +342,7 @@ public class MediaPlayActivity extends BaseActivity {
         attributes.screenBrightness = currentBrightness;
         getWindow().setAttributes(attributes);
         mCenterProgressView.setProgress((int) (currentBrightness * 1000));
+        TimerHandler.sendEmptyMessageDelayed(HIDE_VIEW,800);
     }
 
     /**
