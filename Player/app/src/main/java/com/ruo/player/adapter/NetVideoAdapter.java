@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ruo.player.R;
+import com.ruo.player.Utils.PLGT;
 import com.ruo.player.base.BaseViewHolder;
 import com.ruo.player.entries.NetVideoModel;
 
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2017/3/30.
@@ -23,10 +25,12 @@ import butterknife.ButterKnife;
 
 public class NetVideoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
+    private Context mContext;
     private ArrayList<NetVideoModel> mDatas;
     private LayoutInflater mLayoutInflater;
 
     public NetVideoAdapter(Context context, ArrayList<NetVideoModel> mDatas) {
+        mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         this.mDatas = mDatas;
     }
@@ -69,6 +73,11 @@ public class NetVideoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             model = (NetVideoModel) obj;
             titleView.setText(model.getTitle());
             imgView.setImageURI(model.getImgPath());
+        }
+
+        @OnClick(R.id.item_netvideo_play)
+        public void playVideo(){
+            PLGT.gotoMediaPlayActivity(mContext,model.getTitle(),model.getVideopath());
         }
     }
 }

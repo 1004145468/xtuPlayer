@@ -74,10 +74,9 @@ public class NetUtils {
                         datas.add(model);
                     }
                 }
-
+                DataBaseUtils.clearNetVideo(context);
                 //存数据库,断网可以读取本地
                 DataBaseUtils.saveNetVideo(context,datas);
-
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
