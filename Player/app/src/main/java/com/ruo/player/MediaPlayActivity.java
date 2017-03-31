@@ -1,20 +1,13 @@
 package com.ruo.player;
 
-import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
-import android.app.ActivityManager;
-import android.content.pm.PackageManager;
 import android.media.AudioManager;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityManagerCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -29,11 +22,9 @@ import android.widget.TextView;
 import com.ruo.player.Utils.DensityUtils;
 import com.ruo.player.Utils.DialogUtils;
 import com.ruo.player.Utils.PLGT;
-import com.ruo.player.Utils.WindowUtils;
 import com.ruo.player.base.BaseActivity;
 import com.ruo.player.media.IRenderView;
 import com.ruo.player.media.IjkVideoView;
-import com.ruo.player.views.WindowPlayerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,8 +36,6 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
  */
 
 public class MediaPlayActivity extends BaseActivity {
-
-    private final int REQUEST_ALERT = 1;
 
     private static final String TAG = "MediaPlayActivity";
     private static final int UPDATE_UI = 0x110;
@@ -261,20 +250,8 @@ public class MediaPlayActivity extends BaseActivity {
 
     @OnClick(R.id.media_screencontroller)
     public void addVideoToScreen() {
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.SYSTEM_ALERT_WINDOW) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SYSTEM_ALERT_WINDOW},REQUEST_ALERT);
-        }else{
-            PLGT.openWindowService(this, mediaName, mediaPath, mVideoView.getCurrentPosition());
-            finish();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode == REQUEST_ALERT && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-            PLGT.openWindowService(this, mediaName, mediaPath, mVideoView.getCurrentPosition());
-            finish();
-        }
+        PLGT.openWindowService(this, mediaName, mediaPath, mVideoView.getCurrentPosition());
+        finish();
     }
 
     private void pausePlay() {
