@@ -22,7 +22,8 @@
         <activity android:name=".HomeActivity" />
         <activity
             android:name=".MediaPlayActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:launchMode="singleInstance"/>
         <activity android:name=".UserCenterActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>

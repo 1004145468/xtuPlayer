@@ -34,6 +34,15 @@ public class PLGT {
         }
     }
 
+    //跳转进行媒体的播放
+    public static void gotoMediaPlayActivityByService(Context context, String fileName, String filePath) {
+        Intent intent = new Intent(context, MediaPlayActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("mediaName", fileName);
+        intent.putExtra("mediaPath", filePath);
+        context.startActivity(intent);
+    }
+
     /**
      * 进入用户管理中心
      *
@@ -48,11 +57,12 @@ public class PLGT {
 
     /**
      * 开启window 服务
+     *
      * @param context
      * @param videoName
      * @param videoPath
      */
-    public static void openWindowService(Context context, String videoName, String videoPath,int seekTo) {
+    public static void openWindowService(Context context, String videoName, String videoPath, int seekTo) {
         if (context instanceof Activity) {
             Intent intent = new Intent(context, WindowService.class);
             intent.putExtra("videoName", videoName);

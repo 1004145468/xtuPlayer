@@ -23,8 +23,8 @@ public class WindowService extends Service {
     }
 
     private void addViewsToScreen(Intent intent) {
-        String videoName = intent.getStringExtra("videoName");
-        String videoPath = intent.getStringExtra("videoPath");
+        final String videoName = intent.getStringExtra("videoName");
+        final String videoPath = intent.getStringExtra("videoPath");
         int seekTo = intent.getIntExtra("seekTo", 0);
         final WindowPlayerView windowPlayerView = new WindowPlayerView(WindowService.this);
         windowPlayerView.setVideoInfo(videoName, videoPath, seekTo);
@@ -38,7 +38,10 @@ public class WindowService extends Service {
 
             @Override
             public void onScale() {
-              //  PLGT.gotoMediaPlayActivity(getContext(), videoname, videopath);
+                PLGT.gotoMediaPlayActivityByService(WindowService.this, videoName, videoPath);
+                //移除窗口
+                WindowUtils.removeScreenView(WindowService.this,windowPlayerView);
+                stopSelf();
             }
         });
         WindowUtils.addScreenView(this, windowPlayerView);
