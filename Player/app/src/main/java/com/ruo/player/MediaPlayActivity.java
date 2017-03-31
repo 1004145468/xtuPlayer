@@ -24,9 +24,12 @@ import android.widget.TextView;
 
 import com.ruo.player.Utils.DensityUtils;
 import com.ruo.player.Utils.DialogUtils;
+import com.ruo.player.Utils.PLGT;
+import com.ruo.player.Utils.WindowUtils;
 import com.ruo.player.base.BaseActivity;
 import com.ruo.player.media.IRenderView;
 import com.ruo.player.media.IjkVideoView;
+import com.ruo.player.views.WindowPlayerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,8 +63,6 @@ public class MediaPlayActivity extends BaseActivity {
     TextView mCurrentTimeView;
     @BindView(R.id.media_totaltime)
     TextView mTotalTimeView;
-    @BindView(R.id.media_screencontroller)
-    ImageView mScreenCotrollerView;
     @BindView(R.id.media_controller)
     View mControllerView;
     @BindView(R.id.media_centerIcon)
@@ -90,8 +91,7 @@ public class MediaPlayActivity extends BaseActivity {
     private Handler TimerHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            switch(msg.what)
-            {
+            switch (msg.what) {
                 case UPDATE_UI:
                     int currenttime = mVideoView.getCurrentPosition();
                     mProgressView.setProgress(currenttime);
@@ -104,6 +104,8 @@ public class MediaPlayActivity extends BaseActivity {
             }
         }
     };
+    private String mediaName;
+    private String mediaPath;
 
 
     @Override
@@ -196,7 +198,7 @@ public class MediaPlayActivity extends BaseActivity {
         mVideoView.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(IMediaPlayer iMediaPlayer, int i, int i1) {
-                DialogUtils.showToast(MediaPlayActivity.this,getString(R.string.play_error));
+                DialogUtils.showToast(MediaPlayActivity.this, getString(R.string.play_error));
                 return false;
             }
         });
@@ -223,8 +225,8 @@ public class MediaPlayActivity extends BaseActivity {
         });
 
 
-        String mediaName = getIntent().getStringExtra("mediaName");
-        String mediaPath = getIntent().getStringExtra("mediaPath");
+        mediaName = getIntent().getStringExtra("mediaName");
+        mediaPath = getIntent().getStringExtra("mediaPath");
         if (!TextUtils.isEmpty(mediaPath)) {
             mTitleView.setText(mediaName);
             mVideoView.setVideoPath(mediaPath);
@@ -249,6 +251,12 @@ public class MediaPlayActivity extends BaseActivity {
         } else {
             mLockorUnLockView.setImageResource(R.drawable.select_unlock);
         }
+    }
+
+    @OnClick(R.id.media_screencontroller)
+    public void addVideoToScreen() {
+        PLGT.openWindowService(this, mScreenHeight / 2, mediaName, mediaPath, mVideoView.getCurrentPosition());
+        finish();
     }
 
     private void pausePlay() {
@@ -318,7 +326,7 @@ public class MediaPlayActivity extends BaseActivity {
         }
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVoice, 0);
         mCenterProgressView.setProgress(currentVoice);
-        TimerHandler.sendEmptyMessageDelayed(HIDE_VIEW,800);
+        TimerHandler.sendEmptyMessageDelayed(HIDE_VIEW, 800);
     }
 
     /**
@@ -342,7 +350,7 @@ public class MediaPlayActivity extends BaseActivity {
         attributes.screenBrightness = currentBrightness;
         getWindow().setAttributes(attributes);
         mCenterProgressView.setProgress((int) (currentBrightness * 1000));
-        TimerHandler.sendEmptyMessageDelayed(HIDE_VIEW,800);
+        TimerHandler.sendEmptyMessageDelayed(HIDE_VIEW, 800);
     }
 
     /**
@@ -355,10 +363,10 @@ public class MediaPlayActivity extends BaseActivity {
         int videototaltime = mVideoView.getDuration();
         int currentTime = mVideoView.getCurrentPosition();
         currentTime = (int) (currentTime + videototaltime * percent);
-        if(currentTime > videototaltime){
+        if (currentTime > videototaltime) {
             currentTime = videototaltime;
         }
-        if(currentTime < 0){
+        if (currentTime < 0) {
             currentTime = 0;
         }
         mVideoView.seekTo(currentTime);

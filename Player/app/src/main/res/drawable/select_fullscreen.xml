@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:state_pressed="true" android:drawable="@drawable/video_fullscreen_selected"/>
-    <item android:drawable="@drawable/video_fullscreen"/>
+    <item android:drawable="@drawable/restorefullscreen_press" android:state_pressed="true" />
+    <item android:drawable="@drawable/restorefullscreen_normal" />
 </selector>

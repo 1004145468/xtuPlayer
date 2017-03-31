@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    >
+    
+    <com.ruo.player.media.IjkVideoView
+        android:id="@+id/window_videoview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ImageView
+        android:id="@+id/window_controller"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/select_fullscreen"
+        android:layout_gravity="right|bottom"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"/>
+
+    <ImageView
+        android:id="@+id/window_play"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="left|bottom"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"/>
+
+
+
+</FrameLayout>
