@@ -13,15 +13,21 @@
         android:gravity="center"
         android:text="@string/netvideo"/>
     
-    
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/netvideo_list"
+
+    <com.ruo.player.views.RefreshLayout
+        android:id="@+id/netvideo_refreshview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"/>
+        android:layout_marginRight="2dp">
 
+        <ListView
+            android:id="@+id/netvideo_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"/>
 
+    </com.ruo.player.views.RefreshLayout>
 
 </LinearLayout>

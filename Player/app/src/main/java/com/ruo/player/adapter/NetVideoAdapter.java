@@ -1,57 +1,69 @@
 package com.ruo.player.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ruo.player.R;
 import com.ruo.player.Utils.PLGT;
-import com.ruo.player.base.BaseViewHolder;
 import com.ruo.player.entries.NetVideoModel;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by Administrator on 2017/3/30.
+ * Created by Administrator on 2017/3/31.
  */
 
-public class NetVideoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class NetVideoAdapter extends BaseAdapter {
 
     private Context mContext;
-    private ArrayList<NetVideoModel> mDatas;
     private LayoutInflater mLayoutInflater;
+    private List<NetVideoModel> mDatas;
 
-    public NetVideoAdapter(Context context, ArrayList<NetVideoModel> mDatas) {
-        mContext = context;
-        mLayoutInflater = LayoutInflater.from(context);
+    public NetVideoAdapter(Context mContext, List<NetVideoModel> mDatas) {
+        mLayoutInflater = LayoutInflater.from(mContext);
         this.mDatas = mDatas;
+        this.mContext = mContext;
     }
 
     @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rootView = mLayoutInflater.inflate(R.layout.item_netvideo, parent, false);
-        return new NetVideoHolder(rootView);
-    }
-
-    @Override
-    public void onBindViewHolder(BaseViewHolder holder, int position) {
-        holder.setData(mDatas.get(position));
-    }
-
-    @Override
-    public int getItemCount() {
+    public int getCount() {
         return mDatas.size();
     }
 
-    class NetVideoHolder extends BaseViewHolder {
+    @Override
+    public Object getItem(int position) {
+        return mDatas.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        NetVideoHolder holder;
+        if(convertView == null){
+            convertView = mLayoutInflater.inflate(R.layout.item_netvideo,parent,false);
+            holder = new NetVideoHolder(convertView);
+            convertView.setTag(holder);
+        }else{
+            holder = (NetVideoHolder) convertView.getTag();
+        }
+        holder.setData(mDatas.get(position));
+        return convertView;
+    }
+
+    class NetVideoHolder {
 
         private NetVideoModel model;
 
@@ -61,11 +73,9 @@ public class NetVideoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         SimpleDraweeView imgView;
 
         public NetVideoHolder(View itemView) {
-            super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        @Override
         public void setData(Object obj) {
             if (obj == null) {
                 return;
@@ -76,8 +86,8 @@ public class NetVideoAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
 
         @OnClick(R.id.item_netvideo_play)
-        public void playVideo(){
-            PLGT.gotoMediaPlayActivity(mContext,model.getTitle(),model.getVideopath());
+        public void playVideo() {
+            PLGT.gotoMediaPlayActivity(mContext, model.getTitle(), model.getVideopath());
         }
     }
 }

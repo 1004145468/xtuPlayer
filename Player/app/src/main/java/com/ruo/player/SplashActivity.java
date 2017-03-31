@@ -76,6 +76,6 @@ public class SplashActivity extends BaseActivity {
                 .append("&channel=tengxun&aid=7&app_name=joke_essay&version_code=601&version_name=6.0.1&device_platform=android")
                 .append("&ssmix=a&device_type=SM919&device_brand=SMARTISAN&os_api=23&os_version=6.0.1")
                 .append("&uuid=990007181217339&openudid=d51fcc7a0ab54dd5&manifest_version_code=601&resolution=1440*2560&dpi=560&update_version_code=6011");
-        NetUtils.getNetVideosByGet(this, urlBuilder.toString(), null);
+        NetUtils.getNetVideosByGet(this, null);
     }
 }
