@@ -27,8 +27,10 @@ import okhttp3.Response;
 
 public class NetUtils {
 
+    private static Call mCurrentCall;
     /**
      * 获取网络视频的
+     * 实现了三级缓存：  内存 本地 网络
      *
      * @param url
      * @param listener
@@ -37,8 +39,8 @@ public class NetUtils {
         final Handler handler = new Handler();
         OkHttpClient okHttpClient = new OkHttpClient();
         final Request request = new Request.Builder().url(url).get().build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        mCurrentCall = okHttpClient.newCall(request);
+        mCurrentCall.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
             }
@@ -74,17 +76,28 @@ public class NetUtils {
                         datas.add(model);
                     }
                 }
+                //保留最新的一份数据
                 DataBaseUtils.clearNetVideo(context);
                 //存数据库,断网可以读取本地
-                DataBaseUtils.saveNetVideo(context,datas);
+                DataBaseUtils.saveVideoModel(context,datas);
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        listener.done(datas);
+                        if(listener != null){
+                            listener.done(datas);
+                        }
                     }
                 });
             }
         });
+    }
 
+    /**
+     * 取消网络请求
+     */
+    public static void cancelNetVideosByGet(){
+        if(mCurrentCall != null && mCurrentCall.isExecuted()){
+            mCurrentCall.cancel();
+        }
     }
 }

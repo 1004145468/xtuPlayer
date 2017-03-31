@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.ruo.player.Interface.OnResultAttachListener;
 import com.ruo.player.R;
+import com.ruo.player.Utils.DataBaseUtils;
 import com.ruo.player.Utils.NetUtils;
 import com.ruo.player.adapter.NetVideoAdapter;
 import com.ruo.player.decoraion.PlayerEmptyItemDecoration;
@@ -32,9 +33,10 @@ public class NetVideoFragment extends Fragment {
 
     private static final String TAG = "NetVideoFragment";
 
+    private View mRootView;
+
     @BindView(R.id.netvideo_list)
     RecyclerView mNetVideoListView;
-
     private ArrayList<NetVideoModel> mDatas;
     private NetVideoAdapter mAdapter;
 
@@ -42,11 +44,26 @@ public class NetVideoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View mRootView = inflater.inflate(R.layout.fragment_netvideo, container, false);
-        ButterKnife.bind(this, mRootView);
-        initViews();
-        initDatas();
+        if(mRootView == null){
+            mRootView = inflater.inflate(R.layout.fragment_netvideo, container, false);
+            ButterKnife.bind(this, mRootView);
+            initViews();
+            loadLocalDatas();
+            loadNetData();
+        }
         return mRootView;
+    }
+
+    private void loadLocalDatas() {
+        DataBaseUtils.getNetVideo(getActivity(), new OnResultAttachListener<List<NetVideoModel>>() {
+            @Override
+            public void done(List<NetVideoModel> localmodels) {
+                if(localmodels != null && localmodels.size() > 0){
+                    mDatas.addAll(localmodels);
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     /**
@@ -62,9 +79,10 @@ public class NetVideoFragment extends Fragment {
     }
 
     /**
-     * 初始化数据
+     * 加载网络数据
      */
-    private void initDatas() {
+    private void loadNetData() {
+        Log.d(TAG, "loadNetData: 加载一批新的数据。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。");
         StringBuilder urlBuilder = new StringBuilder();
         urlBuilder.append("http://is.snssdk.com/neihan/stream/mix/v1/?")
                 .append("mpic=1&webp=1&essence=1&content_type=-104&message_cursor=-1")
@@ -82,6 +100,9 @@ public class NetVideoFragment extends Fragment {
             @Override
             public void done(List<NetVideoModel> models) {
                 if(models != null && models.size() > 0){
+                    if(mDatas != null && mDatas.size() > 1){
+                        mDatas.clear();
+                    }
                     mDatas.addAll(models);
                     mAdapter.notifyDataSetChanged();
                 }

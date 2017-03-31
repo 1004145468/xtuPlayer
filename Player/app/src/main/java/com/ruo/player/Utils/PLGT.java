@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.ruo.player.HomeActivity;
 import com.ruo.player.MediaPlayActivity;
 import com.ruo.player.UserCenterActivity;
 
@@ -13,6 +14,14 @@ import com.ruo.player.UserCenterActivity;
  */
 
 public class PLGT {
+
+    //进入主页
+    public static void gotoHomeActivity(Context context){
+        if(context instanceof Activity){
+            Intent intent = new Intent(context, HomeActivity.class);
+            context.startActivity(intent);
+        }
+    }
 
     //跳转进行媒体的播放
     public static void gotoMediaPlayActivity(Context context, String fileName, String filePath) {

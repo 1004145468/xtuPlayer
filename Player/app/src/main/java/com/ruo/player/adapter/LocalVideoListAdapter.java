@@ -7,12 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ruo.player.R;
 import com.ruo.player.Utils.PLGT;
 import com.ruo.player.base.BaseViewHolder;
-import com.ruo.player.entries.MovieModel;
+import com.ruo.player.entries.LocalMovieModel;
 
 import java.util.List;
 
@@ -23,13 +22,13 @@ import butterknife.OnClick;
  * Created by Administrator on 2017/3/28.
  */
 
-public class LauncherListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class LocalVideoListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private Context mContext;
     private LayoutInflater mLayoutInflater;
-    private List<MovieModel> mDatas;
+    private List<LocalMovieModel> mDatas;
 
-    public LauncherListAdapter(Context context, List<MovieModel> mDatas) {
+    public LocalVideoListAdapter(Context context, List<LocalMovieModel> mDatas) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         this.mDatas = mDatas;
@@ -53,7 +52,7 @@ public class LauncherListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     class LauncherListHolder extends BaseViewHolder {
 
-        private MovieModel movieModel;
+        private LocalMovieModel localMovieModel;
 
         @BindView(R.id.launcherlist_img)
         ImageView imgView;
@@ -73,16 +72,18 @@ public class LauncherListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             if (obj == null) {
                 return;
             }
-            movieModel = (MovieModel) obj;
-            imgView.setImageBitmap(movieModel.getThumbnail());
-            titleView.setText(movieModel.getMovieName());
-            sizeView.setText(movieModel.getFileSize());
-            pathView.setText(movieModel.getFilePath());
+            localMovieModel = (LocalMovieModel) obj;
+            if(localMovieModel.getThumbnail() != null){
+                imgView.setImageBitmap(localMovieModel.getThumbnail());
+            }
+            titleView.setText(localMovieModel.getMovieName());
+            sizeView.setText(localMovieModel.getFileSize());
+            pathView.setText(localMovieModel.getFilePath());
         }
 
         @OnClick(R.id.launcher_root)
         public void onItemClick() {
-            PLGT.gotoMediaPlayActivity(mContext, movieModel.getMovieName(), movieModel.getFilePath());
+            PLGT.gotoMediaPlayActivity(mContext, localMovieModel.getMovieName(), localMovieModel.getFilePath());
         }
     }
 }

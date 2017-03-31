@@ -1,9 +1,11 @@
 package com.ruo.player;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -62,6 +64,7 @@ public class HomeActivity extends FragmentActivity {
     @OnClick(R.id.home_localvideo)
     public void loadLocalVideoFragment() {
         selectFragment(1);
+        
     }
 
     @OnClick(R.id.home_head)
@@ -81,6 +84,4 @@ public class HomeActivity extends FragmentActivity {
         //切换内容面板
         getSupportFragmentManager().beginTransaction().replace(R.id.home_content, mFragmentFactory.get(index)).commit();
     }
-
-
 }
