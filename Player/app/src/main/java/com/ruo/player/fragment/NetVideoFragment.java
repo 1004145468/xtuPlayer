@@ -1,12 +1,9 @@
 package com.ruo.player.fragment;
 
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +14,6 @@ import com.ruo.player.R;
 import com.ruo.player.Utils.DataBaseUtils;
 import com.ruo.player.Utils.NetUtils;
 import com.ruo.player.adapter.NetVideoAdapter;
-import com.ruo.player.decoraion.PlayerEmptyItemDecoration;
 import com.ruo.player.entries.NetVideoModel;
 import com.ruo.player.views.RefreshLayout;
 
@@ -77,6 +73,7 @@ public class NetVideoFragment extends Fragment {
         mRefreshLayout.setOnLoadMoreListener(new RefreshLayout.OnLoadMoreListener() {
             @Override
             public void onLoad() {
+                mNetVideoListView.setSelection(mDatas.size());
                loadNetData(true);
             }
         });
