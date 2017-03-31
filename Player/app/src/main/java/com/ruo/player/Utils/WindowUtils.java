@@ -26,7 +26,7 @@ public class WindowUtils {
         params.width = DensityUtils.dip2px(context, 320);
         params.height = DensityUtils.dip2px(context, 200);
         params.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
-        params.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
+        params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         params.format = PixelFormat.RGBA_8888;
         params.gravity = (Gravity.CENTER);
         windowManager.addView(contentView, params);
