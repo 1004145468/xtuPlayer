@@ -49,14 +49,12 @@ public class PLGT {
     /**
      * 开启window 服务
      * @param context
-     * @param screenWidth
      * @param videoName
      * @param videoPath
      */
-    public static void openWindowService(Context context, int screenWidth, String videoName, String videoPath,int seekTo) {
+    public static void openWindowService(Context context, String videoName, String videoPath,int seekTo) {
         if (context instanceof Activity) {
             Intent intent = new Intent(context, WindowService.class);
-            intent.putExtra("screenWidth", screenWidth);
             intent.putExtra("videoName", videoName);
             intent.putExtra("videoPath", videoPath);
             intent.putExtra("seekTo", seekTo);

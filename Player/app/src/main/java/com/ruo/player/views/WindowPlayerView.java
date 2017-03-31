@@ -36,7 +36,7 @@ public class WindowPlayerView extends FrameLayout {
         super(context);
         View rootView = LayoutInflater.from(context).inflate(R.layout.view_windowplayerview, this, true);
         ButterKnife.bind(this, rootView);
-        ijkVideoView.setAspectRatio(IRenderView.AR_ASPECT_FIT_PARENT); //设置视频展示的样式
+        ijkVideoView.setAspectRatio(IRenderView.AR_ASPECT_WRAP_CONTENT); //设置视频展示的样式
     }
 
     public void setVideoInfo(String videoname, String videopath, final int seekto) {
@@ -57,6 +57,12 @@ public class WindowPlayerView extends FrameLayout {
                 return false;
             }
         });
+        ijkVideoView.setOnCompletionListener(new IMediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(IMediaPlayer iMediaPlayer) {
+                showView.setImageResource(R.drawable.select_play_grep); //设置播放图标
+            }
+        });
     }
 
 
@@ -74,8 +80,26 @@ public class WindowPlayerView extends FrameLayout {
         }
     }
 
+    @OnClick(R.id.window_delete)
+    public void exitWindow(){
+        if(mListener != null){
+            mListener.onExit();
+        }
+    }
+
     @OnClick(R.id.window_controller)
     public void openMediaActivity() {
-        PLGT.gotoMediaPlayActivity(getContext(), videoname, videopath);
+        if(mListener != null){
+            mListener.onScale();
+        }
+    }
+
+    private onWindowOperationListener mListener;
+    public void setonRemoveWindowListener(onWindowOperationListener mListener) {
+        this.mListener = mListener;
+    }
+    public interface onWindowOperationListener{
+        void onExit();
+        void onScale();
     }
 }

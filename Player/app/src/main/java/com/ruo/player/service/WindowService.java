@@ -5,7 +5,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-import com.ruo.player.Utils.DensityUtils;
+import com.ruo.player.Utils.PLGT;
 import com.ruo.player.Utils.WindowUtils;
 import com.ruo.player.views.WindowPlayerView;
 
@@ -23,12 +23,24 @@ public class WindowService extends Service {
     }
 
     private void addViewsToScreen(Intent intent) {
-        int screenWidth = intent.getIntExtra("screenWidth", 0);
         String videoName = intent.getStringExtra("videoName");
         String videoPath = intent.getStringExtra("videoPath");
         int seekTo = intent.getIntExtra("seekTo", 0);
-        WindowPlayerView windowPlayerView = new WindowPlayerView(WindowService.this);
+        final WindowPlayerView windowPlayerView = new WindowPlayerView(WindowService.this);
         windowPlayerView.setVideoInfo(videoName, videoPath, seekTo);
-        WindowUtils.addScreenView(this, windowPlayerView, screenWidth, DensityUtils.dip2px(this, 180));
+        windowPlayerView.setonRemoveWindowListener(new WindowPlayerView.onWindowOperationListener() {
+            @Override
+            public void onExit() {
+                //移除窗口
+                WindowUtils.removeScreenView(WindowService.this,windowPlayerView);
+                stopSelf();
+            }
+
+            @Override
+            public void onScale() {
+              //  PLGT.gotoMediaPlayActivity(getContext(), videoname, videopath);
+            }
+        });
+        WindowUtils.addScreenView(this, windowPlayerView);
     }
 }

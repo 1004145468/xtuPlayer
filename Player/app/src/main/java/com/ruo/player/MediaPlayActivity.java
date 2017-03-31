@@ -85,6 +85,9 @@ public class MediaPlayActivity extends BaseActivity {
     private boolean showController = false;
     private boolean lockScreen = false;
 
+    private String mediaName;
+    private String mediaPath;
+
     private AudioManager mAudioManager;
     private int mMaxAudioVoice;
 
@@ -104,9 +107,6 @@ public class MediaPlayActivity extends BaseActivity {
             }
         }
     };
-    private String mediaName;
-    private String mediaPath;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -255,7 +255,7 @@ public class MediaPlayActivity extends BaseActivity {
 
     @OnClick(R.id.media_screencontroller)
     public void addVideoToScreen() {
-        PLGT.openWindowService(this, mScreenHeight / 2, mediaName, mediaPath, mVideoView.getCurrentPosition());
+        PLGT.openWindowService(this, mediaName, mediaPath, mVideoView.getCurrentPosition());
         finish();
     }
 
