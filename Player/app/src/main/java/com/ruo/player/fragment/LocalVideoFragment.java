@@ -121,8 +121,10 @@ public class LocalVideoFragment extends Fragment {
                 if (mDatas != null && mDatas.size() > 0) {
                     mDatas.clear();
                 }
-                mDatas.addAll(localMovieModels);
-                localVideoListAdapter.notifyDataSetChanged();
+                if(localMovieModels != null && localMovieModels.size() > 0){
+                    mDatas.addAll(localMovieModels);
+                    localVideoListAdapter.notifyDataSetChanged();
+                }
             }
 
         }.execute();
