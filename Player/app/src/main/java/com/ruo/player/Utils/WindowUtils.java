@@ -45,7 +45,7 @@ public class WindowUtils {
      * @param rawX
      * @param rawY
      */
-    public static void refreshScreenView(Context context, View contentView, float rawX, float rawY) {
+    public static void refreshScreenViewPosition(Context context, View contentView, float rawX, float rawY) {
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         WindowManager.LayoutParams params = getDefaultLayoutParams(context);
         params.gravity = Gravity.LEFT | Gravity.TOP; //左上为坐标系

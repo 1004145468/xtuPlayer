@@ -47,7 +47,7 @@ public class WindowService extends Service {
 
             @Override
             public void onScroll(MotionEvent e) {
-                WindowUtils.refreshScreenView(WindowService.this, windowPlayerView, e.getRawX(), e.getRawY());
+                WindowUtils.refreshScreenViewPosition(WindowService.this, windowPlayerView, e.getRawX(), e.getRawY());
             }
         });
         WindowUtils.addScreenView(this, windowPlayerView);
