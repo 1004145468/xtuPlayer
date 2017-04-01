@@ -4,6 +4,7 @@ package com.ruo.player.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.view.MotionEvent;
 
 import com.ruo.player.Utils.PLGT;
 import com.ruo.player.Utils.WindowUtils;
@@ -32,16 +33,21 @@ public class WindowService extends Service {
             @Override
             public void onExit() {
                 //移除窗口
-                WindowUtils.removeScreenView(WindowService.this,windowPlayerView);
+                WindowUtils.removeScreenView(WindowService.this, windowPlayerView);
                 stopSelf();
             }
 
             @Override
             public void onScale(int currentIndex) {
                 //移除窗口
-                WindowUtils.removeScreenView(WindowService.this,windowPlayerView);
-                PLGT.gotoMediaPlayActivityByService(WindowService.this, videoName, videoPath,currentIndex);
+                WindowUtils.removeScreenView(WindowService.this, windowPlayerView);
+                PLGT.gotoMediaPlayActivityByService(WindowService.this, videoName, videoPath, currentIndex);
                 stopSelf();
+            }
+
+            @Override
+            public void onScroll(MotionEvent e) {
+                WindowUtils.refreshScreenView(WindowService.this, windowPlayerView, e.getRawX(), e.getRawY());
             }
         });
         WindowUtils.addScreenView(this, windowPlayerView);

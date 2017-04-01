@@ -2,7 +2,10 @@ package com.ruo.player.views;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -23,6 +26,8 @@ import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 public class WindowPlayerView extends FrameLayout {
 
+    private static final String TAG = "WindowPlayerView";
+
     @BindView(R.id.window_play)
     ImageView showView;
 
@@ -36,7 +41,20 @@ public class WindowPlayerView extends FrameLayout {
         super(context);
         View rootView = LayoutInflater.from(context).inflate(R.layout.view_windowplayerview, this, true);
         ButterKnife.bind(this, rootView);
+        initViews();
+    }
+
+    private void initViews() {
         ijkVideoView.setAspectRatio(IRenderView.AR_ASPECT_WRAP_CONTENT); //设置视频展示的样式
+        ijkVideoView.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (mListener != null) {
+                    mListener.onScroll(event);
+                }
+                return true;
+            }
+        });
     }
 
     public void setVideoInfo(String videoname, String videopath, final int seekto) {
@@ -71,20 +89,20 @@ public class WindowPlayerView extends FrameLayout {
         if (ijkVideoView == null) {
             return;
         }
-        if (ijkVideoView.isPlaying()){
+        if (ijkVideoView.isPlaying()) {
             ijkVideoView.pause();
             showView.setImageResource(R.drawable.select_play_grep);
-        }else{
+        } else {
             ijkVideoView.start();
             showView.setImageResource(R.drawable.select_pause_grep);
         }
     }
 
     @OnClick(R.id.window_delete)
-    public void exitWindow(){
+    public void exitWindow() {
         ijkVideoView.pause();
         ijkVideoView.release(true);
-        if(mListener != null){
+        if (mListener != null) {
             mListener.onExit();
         }
     }
@@ -94,17 +112,24 @@ public class WindowPlayerView extends FrameLayout {
         int currentIndex = ijkVideoView.getCurrentPosition();
         ijkVideoView.pause();
         ijkVideoView.release(true);
-        if(mListener != null){
+        if (mListener != null) {
             mListener.onScale(currentIndex);
         }
     }
 
     private onWindowOperationListener mListener;
+
     public void setonRemoveWindowListener(onWindowOperationListener mListener) {
         this.mListener = mListener;
     }
-    public interface onWindowOperationListener{
+
+    public interface onWindowOperationListener {
         void onExit();
+
         void onScale(int currentIndex);
+
+        void onScroll(MotionEvent e);
     }
+
+
 }
