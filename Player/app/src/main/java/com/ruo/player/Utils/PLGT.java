@@ -72,6 +72,5 @@ public class PLGT {
             intent.putExtra("seekTo", seekTo);
             context.startService(intent);
         }
-
     }
 }
