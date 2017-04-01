@@ -37,10 +37,10 @@ public class WindowService extends Service {
             }
 
             @Override
-            public void onScale() {
-                PLGT.gotoMediaPlayActivityByService(WindowService.this, videoName, videoPath);
+            public void onScale(int currentIndex) {
                 //移除窗口
                 WindowUtils.removeScreenView(WindowService.this,windowPlayerView);
+                PLGT.gotoMediaPlayActivityByService(WindowService.this, videoName, videoPath,currentIndex);
                 stopSelf();
             }
         });

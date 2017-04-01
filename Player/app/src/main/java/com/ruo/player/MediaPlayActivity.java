@@ -82,6 +82,7 @@ public class MediaPlayActivity extends BaseActivity {
 
     private String mediaName;
     private String mediaPath;
+    private int seekTo;
 
     private AudioManager mAudioManager;
     private int mMaxAudioVoice;
@@ -170,6 +171,11 @@ public class MediaPlayActivity extends BaseActivity {
     }
 
     private void initViews() {
+
+        mediaName = getIntent().getStringExtra("mediaName");
+        mediaPath = getIntent().getStringExtra("mediaPath");
+        seekTo = getIntent().getIntExtra("seekTo", 0);
+
         //MediaView
         mVideoView.setAspectRatio(IRenderView.AR_ASPECT_FIT_PARENT); //设置视频展示的样式
         mVideoView.setOnPreparedListener(new IMediaPlayer.OnPreparedListener() {
@@ -181,6 +187,7 @@ public class MediaPlayActivity extends BaseActivity {
                 mProgressView.setProgress(0);
                 mBtnView.setImageResource(R.drawable.movie_ctrlbar_btn_pause_selected); //设置播放按钮
                 displayFormatTime(mTotalTimeView, totaltime);
+                mVideoView.seekTo(seekTo);
                 TimerHandler.sendEmptyMessage(UPDATE_UI);
             }
         });
@@ -219,9 +226,6 @@ public class MediaPlayActivity extends BaseActivity {
             }
         });
 
-
-        mediaName = getIntent().getStringExtra("mediaName");
-        mediaPath = getIntent().getStringExtra("mediaPath");
         if (!TextUtils.isEmpty(mediaPath)) {
             mTitleView.setText(mediaName);
             mVideoView.setVideoPath(mediaPath);

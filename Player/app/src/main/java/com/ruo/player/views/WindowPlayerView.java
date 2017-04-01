@@ -82,6 +82,8 @@ public class WindowPlayerView extends FrameLayout {
 
     @OnClick(R.id.window_delete)
     public void exitWindow(){
+        ijkVideoView.pause();
+        ijkVideoView.release(true);
         if(mListener != null){
             mListener.onExit();
         }
@@ -89,8 +91,11 @@ public class WindowPlayerView extends FrameLayout {
 
     @OnClick(R.id.window_controller)
     public void openMediaActivity() {
+        int currentIndex = ijkVideoView.getCurrentPosition();
+        ijkVideoView.pause();
+        ijkVideoView.release(true);
         if(mListener != null){
-            mListener.onScale();
+            mListener.onScale(currentIndex);
         }
     }
 
@@ -100,6 +105,6 @@ public class WindowPlayerView extends FrameLayout {
     }
     public interface onWindowOperationListener{
         void onExit();
-        void onScale();
+        void onScale(int currentIndex);
     }
 }

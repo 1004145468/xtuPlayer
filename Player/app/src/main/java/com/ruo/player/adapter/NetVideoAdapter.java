@@ -52,11 +52,11 @@ public class NetVideoAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         NetVideoHolder holder;
-        if(convertView == null){
-            convertView = mLayoutInflater.inflate(R.layout.item_netvideo,parent,false);
+        if (convertView == null) {
+            convertView = mLayoutInflater.inflate(R.layout.item_netvideo, parent, false);
             holder = new NetVideoHolder(convertView);
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (NetVideoHolder) convertView.getTag();
         }
         holder.setData(mDatas.get(position));
@@ -87,7 +87,7 @@ public class NetVideoAdapter extends BaseAdapter {
 
         @OnClick(R.id.item_netvideo_play)
         public void playVideo() {
-            PLGT.gotoMediaPlayActivity(mContext, model.getTitle(), model.getVideopath());
+            PLGT.gotoMediaPlayActivity(mContext, model.getTitle(), model.getVideopath(), 0);
         }
     }
 }

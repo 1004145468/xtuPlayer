@@ -73,7 +73,7 @@ public class LocalVideoListAdapter extends RecyclerView.Adapter<BaseViewHolder> 
                 return;
             }
             localMovieModel = (LocalMovieModel) obj;
-            if(localMovieModel.getThumbnail() != null){
+            if (localMovieModel.getThumbnail() != null) {
                 imgView.setImageBitmap(localMovieModel.getThumbnail());
             }
             titleView.setText(localMovieModel.getMovieName());
@@ -83,7 +83,7 @@ public class LocalVideoListAdapter extends RecyclerView.Adapter<BaseViewHolder> 
 
         @OnClick(R.id.launcher_root)
         public void onItemClick() {
-            PLGT.gotoMediaPlayActivity(mContext, localMovieModel.getMovieName(), localMovieModel.getFilePath());
+            PLGT.gotoMediaPlayActivity(mContext, localMovieModel.getMovieName(), localMovieModel.getFilePath(), 0);
         }
     }
 }

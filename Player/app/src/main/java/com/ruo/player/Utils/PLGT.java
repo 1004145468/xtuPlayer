@@ -25,21 +25,23 @@ public class PLGT {
     }
 
     //跳转进行媒体的播放
-    public static void gotoMediaPlayActivity(Context context, String fileName, String filePath) {
+    public static void gotoMediaPlayActivity(Context context, String fileName, String filePath, int seekto) {
         if (context instanceof Activity) {
             Intent intent = new Intent(context, MediaPlayActivity.class);
             intent.putExtra("mediaName", fileName);
             intent.putExtra("mediaPath", filePath);
+            intent.putExtra("seekTo", seekto);
             context.startActivity(intent);
         }
     }
 
     //跳转进行媒体的播放
-    public static void gotoMediaPlayActivityByService(Context context, String fileName, String filePath) {
+    public static void gotoMediaPlayActivityByService(Context context, String fileName, String filePath, int seekto) {
         Intent intent = new Intent(context, MediaPlayActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("mediaName", fileName);
         intent.putExtra("mediaPath", filePath);
+        intent.putExtra("seekTo", seekto);
         context.startActivity(intent);
     }
 
