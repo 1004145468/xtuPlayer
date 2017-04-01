@@ -22,8 +22,8 @@
         <activity android:name=".HomeActivity" />
         <activity
             android:name=".MediaPlayActivity"
-            android:screenOrientation="landscape"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:configChanges="screenSize|orientation|keyboard|keyboardHidden"/>
         <activity android:name=".UserCenterActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -36,7 +36,7 @@
         <service
             android:name=".service.WindowService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true"/>
     </application>
 
 </manifest>
