@@ -42,7 +42,7 @@ public class MediaPlayActivity extends BaseActivity {
     private static final int HIDE_VIEW = 0x111;
 
 
-    private final int ADJUST_GAP = 45;
+    private final int ADJUST_GAP = 54;
 
     @BindView(R.id.media_view)
     IjkVideoView mVideoView;
@@ -384,7 +384,7 @@ public class MediaPlayActivity extends BaseActivity {
                 float percentX = deltaX / mScreenWidth * 0.3f;  //加上阻尼  调整进度
                 adjustVideoProgress(percentX);
             } else if (Math.abs(deltaY) > ADJUST_GAP) {
-                float percentY = deltaY / mScreenHeight;
+                float percentY = deltaY / mScreenHeight * 0.5f;
                 if (startX < mScreenWidth / 2) {  //调整亮度
                     adjustBrissness(-percentY);
                 } else if (startX > mScreenWidth / 2) {
