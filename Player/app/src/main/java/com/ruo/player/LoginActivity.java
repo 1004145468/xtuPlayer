@@ -36,7 +36,7 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.login_forgetpsw)
     public void forgetPsw() {
-
+        PLGT.gotoForgetPswActivity(this);
     }
 
 

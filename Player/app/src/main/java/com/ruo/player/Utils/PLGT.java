@@ -6,6 +6,7 @@ import android.content.Intent;
 
 import com.ruo.player.AboutActivity;
 import com.ruo.player.ChangeInfoActivity;
+import com.ruo.player.ForgetPswActivity;
 import com.ruo.player.HomeActivity;
 import com.ruo.player.LoginActivity;
 import com.ruo.player.MediaPlayActivity;
@@ -113,6 +114,19 @@ public class PLGT {
             context.startActivity(intent);
         }
     }
+
+    /**
+     * 忘记密码界面
+     *
+     * @param context
+     */
+    public static void gotoForgetPswActivity(Context context) {
+        if (context instanceof Activity) {
+            Intent intent = new Intent(context, ForgetPswActivity.class);
+            context.startActivity(intent);
+        }
+    }
+
 
     /**
      * 打开软件介绍界面
