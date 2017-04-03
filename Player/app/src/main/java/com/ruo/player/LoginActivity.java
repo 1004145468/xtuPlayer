@@ -4,6 +4,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -34,6 +35,12 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.login_psw)
     EditText mPswView;
 
+    @BindView(R.id.login_usercontainer)
+    View mUserContainerView;
+
+    @BindView(R.id.login_pswcontainer)
+    View mPswContainerView;
+
     @OnClick(R.id.login_forgetpsw)
     public void forgetPsw() {
         PLGT.gotoForgetPswActivity(this);
@@ -48,9 +55,15 @@ public class LoginActivity extends BaseActivity {
             DialogUtils.showToast(this, "用户名或密码不能为空！");
             return;
         }
+        mUserContainerView.setVisibility(View.INVISIBLE);
+        mPswContainerView.setVisibility(View.INVISIBLE);
+        DialogUtils.showIndeterminateDialog(this, "正在登陆");
         BmobUtils.login(username, password, new SaveListener<Player>() {
             @Override
             public void done(Player player, BmobException e) {
+                mUserContainerView.setVisibility(View.VISIBLE);
+                mPswContainerView.setVisibility(View.VISIBLE);
+                DialogUtils.shutdownIndeterminateDialog();
                 if (e != null) {
                     DialogUtils.showToast(LoginActivity.this, "用户名或密码错误！");
                 } else {

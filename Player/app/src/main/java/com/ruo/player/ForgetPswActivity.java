@@ -5,7 +5,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.ruo.player.R;
 import com.ruo.player.Utils.BmobUtils;
 import com.ruo.player.base.BaseTitleBackActivity;
 
