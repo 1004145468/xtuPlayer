@@ -7,6 +7,7 @@ import android.content.Intent;
 import com.ruo.player.AboutActivity;
 import com.ruo.player.ChangeInfoActivity;
 import com.ruo.player.ForgetPswActivity;
+import com.ruo.player.HistoryPlayActivity;
 import com.ruo.player.HomeActivity;
 import com.ruo.player.LoginActivity;
 import com.ruo.player.MediaPlayActivity;
@@ -150,6 +151,19 @@ public class PLGT {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             ((Activity) context).startActivityForResult(intent, UserCenterActivity.CHANGE_IMAGE_CODE);
+        }
+    }
+
+
+    /**
+     * 打开播放历史界面
+     *
+     * @param context
+     */
+    public static void gotoHistoryActivity(Context context) {
+        if (context instanceof Activity) {
+            Intent intent = new Intent(context, HistoryPlayActivity.class);
+            context.startActivity(intent);
         }
     }
 }

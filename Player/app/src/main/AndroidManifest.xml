@@ -43,6 +43,7 @@
         <activity android:name=".RegeistActivity"/>
         <activity android:name=".ChangeInfoActivity"/>
         <activity android:name=".ForgetPswActivity"/>
+        <activity android:name=".HistoryPlayActivity"/>
 
         <service
             android:name=".service.WindowService"

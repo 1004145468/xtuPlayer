@@ -64,7 +64,7 @@ public class UserCenterActivity extends BaseTitleBackActivity {
 
     @OnClick(R.id.userinfo_playhistorycontainer)
     public void watchHistory() {
-
+        PLGT.gotoHistoryActivity(this);
     }
 
     @OnClick(R.id.userinfo_sharecontainer)
