@@ -1,8 +1,19 @@
 package com.ruo.player;
 
-import com.ruo.player.base.BaseTitleBackActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.widget.EditText;
 
+import com.ruo.player.Utils.BmobUtils;
+import com.ruo.player.Utils.DialogUtils;
+import com.ruo.player.base.BaseTitleBackActivity;
+import com.ruo.player.entries.Player;
+
+import butterknife.BindView;
 import butterknife.OnClick;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by Administrator on 2017/4/3.
@@ -10,9 +21,45 @@ import butterknife.OnClick;
 
 public class ChangeInfoActivity extends BaseTitleBackActivity {
 
-    @OnClick(R.id.changeinfo_save)
-    public void updateUserInfo(){
+    @BindView(R.id.changeinfo_content)
+    EditText contentView;
+    private String nickStr;
+    private Player currentUser;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        currentUser = BmobUtils.getCurrentUser();
+        if (currentUser != null) {
+            nickStr = currentUser.getNick();
+            contentView.setText(nickStr);
+        }
+    }
+
+    @OnClick(R.id.changeinfo_save)
+    public void updateUserInfo() {
+        final String newNick = contentView.getText().toString().trim();
+        if (TextUtils.isEmpty(newNick)) {
+            DialogUtils.showToast(this, "昵称不能为空");
+            return;
+        }
+        if (newNick.equals(nickStr)) {
+            return;
+        }
+        //更新昵称
+        currentUser.setNick(newNick);
+        BmobUtils.updateInfo(currentUser, new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if (e != null) {
+                    DialogUtils.showToast(ChangeInfoActivity.this, "昵称更新失败");
+                } else {
+                    Intent intent = new Intent();
+                    intent.putExtra("nick", newNick);
+                    setResult(RESULT_OK, intent);
+                }
+            }
+        });
     }
 
     @Override

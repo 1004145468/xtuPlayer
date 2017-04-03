@@ -25,6 +25,7 @@ import cn.bmob.v3.listener.UpdateListener;
 public class UserCenterActivity extends BaseTitleBackActivity {
 
     public static final int CHANGE_IMAGE_CODE = 1;
+    public static final int CHANGE_NICK_CODE = 2;
 
     @BindView(R.id.userinfo_head)
     SimpleDraweeView mHeadView;
@@ -55,7 +56,9 @@ public class UserCenterActivity extends BaseTitleBackActivity {
 
     @OnClick(R.id.userinfo_nickcontainer)
     public void changeNick() {
-        PLGT.gotoChangeInfoActivity(this);
+        if (currentUser != null) {
+            PLGT.gotoChangeInfoActivity(this);
+        }
     }
 
     @OnClick(R.id.userinfo_playhistorycontainer)
@@ -86,27 +89,32 @@ public class UserCenterActivity extends BaseTitleBackActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CHANGE_IMAGE_CODE && resultCode == RESULT_OK) {
-            BmobUtils.uploadFile(this, data.getData(), new BmobUtils.onUploadFileResult() {
-                @Override
-                public void onResult(BmobException e, final String fileUrl) {
-                    if (e != null) {
-                        DialogUtils.showToast(UserCenterActivity.this, "头像上传失败！");
-                    } else {
-                        currentUser.setHeadUrl(fileUrl);
-                        BmobUtils.updateInfo(currentUser, new UpdateListener() {
-                            @Override
-                            public void done(BmobException e) {
-                                if (e != null) {
-                                    DialogUtils.showToast(UserCenterActivity.this, "头像更新失败！");
-                                } else {
-                                   mHeadView.setImageURI(fileUrl);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == CHANGE_IMAGE_CODE) {
+                BmobUtils.uploadFile(this, data.getData(), new BmobUtils.onUploadFileResult() {
+                    @Override
+                    public void onResult(BmobException e, final String fileUrl) {
+                        if (e != null) {
+                            DialogUtils.showToast(UserCenterActivity.this, "头像上传失败！");
+                        } else {
+                            currentUser.setHeadUrl(fileUrl);
+                            BmobUtils.updateInfo(currentUser, new UpdateListener() {
+                                @Override
+                                public void done(BmobException e) {
+                                    if (e != null) {
+                                        DialogUtils.showToast(UserCenterActivity.this, "头像更新失败！");
+                                    } else {
+                                        mHeadView.setImageURI(fileUrl);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
-                }
-            });
+                });
+            } else if (requestCode == CHANGE_NICK_CODE) {
+                String newNick = data.getStringExtra("nick");
+                mNickView.setText(newNick);
+            }
         }
     }
 

@@ -81,7 +81,7 @@ public class PLGT {
     public static void gotoChangeInfoActivity(Context context) {
         if (context instanceof Activity) {
             Intent intent = new Intent(context, ChangeInfoActivity.class);
-            context.startActivity(intent);
+            ((Activity) context).startActivityForResult(intent, UserCenterActivity.CHANGE_NICK_CODE);
         }
     }
 
