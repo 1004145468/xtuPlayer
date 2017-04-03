@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/regeist_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_base_title_back" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="60dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="账号"
+            android:textColor="@color/color4"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/regeist_userid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="请输入邮箱"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textColor="@color/color5"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码"
+            android:textColor="@color/color4"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/regeist_psw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textColor="@color/color5"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码"
+            android:textColor="@color/color4"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/regeist_pswagain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="请重复密码"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textColor="@color/color5"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/regeist_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/select_loginbtn_bg"
+        android:text="注　册"
+        android:textColor="@color/color1"
+        android:textSize="18sp" />
+
+
+</LinearLayout>

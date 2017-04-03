@@ -27,6 +27,7 @@ import butterknife.OnClick;
 
 public class HomeActivity extends FragmentActivity {
 
+    private static final int REQUEST_USERINFO = 1;
 
     @BindView(R.id.home_content)
     FrameLayout mContentView;
@@ -64,12 +65,12 @@ public class HomeActivity extends FragmentActivity {
     @OnClick(R.id.home_localvideo)
     public void loadLocalVideoFragment() {
         selectFragment(1);
-        
+
     }
 
     @OnClick(R.id.home_head)
     public void gotoUserCenter() {
-        PLGT.gotoUserCenterActivity(this);
+        PLGT.gotoUserCenterActivity(this, REQUEST_USERINFO);
     }
 
     /**
@@ -83,5 +84,14 @@ public class HomeActivity extends FragmentActivity {
         mLocalVideoView.setImageResource(index == 0 ? R.drawable.localvideo_normal : R.drawable.localvideo_press);
         //切换内容面板
         getSupportFragmentManager().beginTransaction().replace(R.id.home_content, mFragmentFactory.get(index)).commit();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_USERINFO && resultCode == RESULT_OK){
+            PLGT.gotoLoginActivity(this);
+            finish();
+        }
     }
 }

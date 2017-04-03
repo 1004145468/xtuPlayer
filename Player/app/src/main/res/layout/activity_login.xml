@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/regeist_bg"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/circleround_grey_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="190dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:textSize="16sp"
+            android:text="账号" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#88666666" />
+
+        <EditText
+            android:id="@+id/et_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="注册邮箱"
+            android:textSize="16sp"
+            android:singleLine="true"
+            android:textColor="#aaffffff" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/circleround_grey_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="120dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:textSize="16sp"
+            android:text="密码" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#88666666" />
+
+        <EditText
+            android:id="@+id/et_psw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="注册邮箱"
+            android:textSize="16sp"
+            android:singleLine="true"
+            android:textColor="#aaffffff" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/login_forgetpsw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="90dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:text="忘记密码"
+        android:textSize="16sp"
+        android:textColor="@color/color9"
+        />
+
+    <TextView
+        android:id="@+id/login_regeist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="点我注册"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="30dp"
+        android:textSize="14sp"
+        android:textColor="@color/color9"/>
+
+
+</RelativeLayout>

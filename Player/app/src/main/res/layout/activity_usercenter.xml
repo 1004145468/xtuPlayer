@@ -1,6 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/userinfo_bg">
 
-</LinearLayout>
+    <include layout="@layout/activity_base_title_back" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/userinfo_head"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        app:placeholderImage="@drawable/default_head"
+        app:placeholderImageScaleType="focusCrop"
+        app:roundAsCircle="true"
+        app:roundingBorderColor="@color/color2"
+        app:roundingBorderWidth="1dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/userinfo_nickcontainer"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/color8"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="昵称"
+                android:textColor="@color/color3"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/userinfo_nick"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:maxWidth="80dp"
+                android:singleLine="true"
+                android:textColor="@color/color1"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/right_arrow" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/userinfo_playhistorycontainer"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="0.5dp"
+            android:background="@color/color8"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="播放记录"
+                android:textColor="@color/color3"
+                android:textSize="17sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:maxWidth="80dp"
+                android:singleLine="true"
+                android:textColor="@color/color1"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/right_arrow" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/userinfo_sharecontainer"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="0.5dp"
+            android:background="@color/color8"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="分享"
+                android:textColor="@color/color3"
+                android:textSize="17sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:maxWidth="80dp"
+                android:singleLine="true"
+                android:textColor="@color/color1"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/right_arrow" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/userinfo_aboutcontainer"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="0.5dp"
+            android:background="@color/color8"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="关于"
+                android:textColor="@color/color3"
+                android:textSize="17sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:maxWidth="80dp"
+                android:singleLine="true"
+                android:textColor="@color/color1"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/right_arrow" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/userinfo_exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/select_loginbtn_bg"
+        android:text="退　出"
+        android:textColor="@color/color1"
+        android:textSize="18sp" />
+
+</RelativeLayout>

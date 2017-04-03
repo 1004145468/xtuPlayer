@@ -38,6 +38,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AboutActivity"/>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".RegeistActivity"/>
+        <activity android:name=".ChangeInfoActivity"/>
 
         <service
             android:name=".service.WindowService"

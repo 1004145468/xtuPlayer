@@ -1,5 +1,6 @@
 package com.ruo.player.Utils;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -44,5 +45,17 @@ public class DialogUtils {
 
     public static void showToast(Context context, String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 展示分享框
+     * @param context
+     */
+    public static void showShareDialog(Context context) {
+        View contentView = View.inflate(context, R.layout.dialog_share, null);
+        AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.setView(contentView, 0, 0, 0, 0);
+        dialog.setCancelable(true);
+        dialog.show();
     }
 }

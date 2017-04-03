@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.ruo.player.AboutActivity;
+import com.ruo.player.ChangeInfoActivity;
 import com.ruo.player.HomeActivity;
+import com.ruo.player.LoginActivity;
 import com.ruo.player.MediaPlayActivity;
+import com.ruo.player.RegeistActivity;
 import com.ruo.player.UserCenterActivity;
 import com.ruo.player.service.WindowService;
 
@@ -50,9 +54,33 @@ public class PLGT {
      *
      * @param context
      */
-    public static void gotoUserCenterActivity(Context context) {
+    public static void gotoUserCenterActivity(Context context, int requestCode) {
         if (context instanceof Activity) {
             Intent intent = new Intent(context, UserCenterActivity.class);
+            ((Activity) context).startActivityForResult(intent, requestCode);
+        }
+    }
+
+    /**
+     * 打开登录界面
+     *
+     * @param context
+     */
+    public static void gotoLoginActivity(Context context) {
+        if (context instanceof Activity) {
+            Intent intent = new Intent(context, LoginActivity.class);
+            context.startActivity(intent);
+        }
+    }
+
+    /**
+     * 打开修改用户信息的界面
+     *
+     * @param context
+     */
+    public static void gotoChangeInfoActivity(Context context) {
+        if (context instanceof Activity) {
+            Intent intent = new Intent(context, ChangeInfoActivity.class);
             context.startActivity(intent);
         }
     }
@@ -71,6 +99,43 @@ public class PLGT {
             intent.putExtra("videoPath", videoPath);
             intent.putExtra("seekTo", seekTo);
             context.startService(intent);
+        }
+    }
+
+    /**
+     * 打开注册页面
+     *
+     * @param context
+     */
+    public static void gotoRegeistActivity(Context context) {
+        if (context instanceof Activity) {
+            Intent intent = new Intent(context, RegeistActivity.class);
+            context.startActivity(intent);
+        }
+    }
+
+    /**
+     * 打开软件介绍界面
+     *
+     * @param context
+     */
+    public static void gotoAboutActivity(Context context) {
+        if (context instanceof Activity) {
+            Intent intent = new Intent(context, AboutActivity.class);
+            context.startActivity(intent);
+        }
+    }
+
+    /**
+     * 打开媒体图片选择界面
+     *
+     * @param context
+     */
+    public static void gotoImagePickActivity(Context context) {
+        if (context instanceof Activity) {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            ((Activity) context).startActivityForResult(intent, UserCenterActivity.CHANGE_IMAGE_CODE);
         }
     }
 }

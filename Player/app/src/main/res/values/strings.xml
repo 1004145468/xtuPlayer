@@ -5,4 +5,5 @@
     <string name="play_error">视频播放失败！</string>
     <string name="netvideo">网络视频</string>
     <string name="localvideo">本地视频</string>
+    <string name="about">本播放器支持本地和网络视频播放，并支持小窗口，在观看视频的同时，不影响其他软件的使用！</string>
 </resources>
