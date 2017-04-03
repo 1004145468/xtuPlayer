@@ -48,7 +48,8 @@ public class UserCenterActivity extends BaseTitleBackActivity {
     @OnClick(R.id.userinfo_head)
     public void loginOrHeadUpdateHead() {
         if (currentUser == null) {  //注册
-            PLGT.gotoRegeistActivity(this);
+            setResult(RESULT_OK, null);
+            finish();
         } else { //更改头像
             PLGT.gotoImagePickActivity(this);
         }
