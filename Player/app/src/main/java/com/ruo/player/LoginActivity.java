@@ -1,5 +1,6 @@
 package com.ruo.player;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 import com.ruo.player.base.BaseActivity;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -19,7 +21,7 @@ public class LoginActivity extends BaseActivity {
     TextView forgetPswView;
 
     @OnClick(R.id.login_regeist)
-    public void openRegeistActivity(){
+    public void openRegeistActivity() {
 
     }
 
@@ -27,5 +29,7 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
+        forgetPswView.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
     }
 }

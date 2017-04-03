@@ -76,7 +76,6 @@ public class UserCenterActivity extends BaseTitleBackActivity {
         PLGT.gotoAboutActivity(this);
     }
 
-
     /**
      * 退出登录
      */
