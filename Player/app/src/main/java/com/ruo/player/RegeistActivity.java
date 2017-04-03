@@ -41,15 +41,17 @@ public class RegeistActivity extends BaseTitleBackActivity {
             DialogUtils.showToast(this, "两次密码输入不一致！");
             return;
         }
+        DialogUtils.showIndeterminateDialog(this,"正在注册");
         //开始注册
         BmobUtils.signUpWithFile(this, userName, passWord, null, new SaveListener<Player>() {
             @Override
             public void done(Player player, BmobException e) {
+                DialogUtils.shutdownIndeterminateDialog();
                 if (e != null) {
                     if (e.getErrorCode() == 202) {
-                        DialogUtils.showToast(RegeistActivity.this, "注册失败，请重新尝试!");
-                    } else {
                         DialogUtils.showToast(RegeistActivity.this, "该用户名已存在!");
+                    } else {
+                        DialogUtils.showToast(RegeistActivity.this, "注册失败，请重新尝试!");
                     }
                 } else {
                     DialogUtils.showToast(RegeistActivity.this, "注册成功!");

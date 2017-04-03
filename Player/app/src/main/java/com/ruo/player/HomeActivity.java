@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.ruo.player.Utils.BmobUtils;
 import com.ruo.player.Utils.PLGT;
+import com.ruo.player.entries.Player;
 import com.ruo.player.fragment.LocalVideoFragment;
 import com.ruo.player.fragment.NetVideoFragment;
 
@@ -29,8 +29,6 @@ public class HomeActivity extends FragmentActivity {
 
     private static final int REQUEST_USERINFO = 1;
 
-    @BindView(R.id.home_content)
-    FrameLayout mContentView;
     @BindView(R.id.home_netvideo)
     ImageView mNetVideoView;
     @BindView(R.id.home_localvideo)
@@ -46,6 +44,15 @@ public class HomeActivity extends FragmentActivity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         initFragment();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Player currentUser = BmobUtils.getCurrentUser();
+        if (currentUser != null) {
+            mHeadView.setImageURI(currentUser.getHeadUrl());
+        }
     }
 
     private void initFragment() {
@@ -89,7 +96,7 @@ public class HomeActivity extends FragmentActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_USERINFO && resultCode == RESULT_OK){
+        if (requestCode == REQUEST_USERINFO && resultCode == RESULT_OK) {
             PLGT.gotoLoginActivity(this);
             finish();
         }
