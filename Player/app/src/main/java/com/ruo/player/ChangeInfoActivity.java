@@ -1,5 +1,6 @@
 package com.ruo.player;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -47,16 +48,19 @@ public class ChangeInfoActivity extends BaseTitleBackActivity {
             return;
         }
         //更新昵称
+        DialogUtils.showIndeterminateDialog(this,"正在更新昵称");
         currentUser.setNick(newNick);
         BmobUtils.updateInfo(currentUser, new UpdateListener() {
             @Override
             public void done(BmobException e) {
+                DialogUtils.shutdownIndeterminateDialog();
                 if (e != null) {
                     DialogUtils.showToast(ChangeInfoActivity.this, "昵称更新失败");
                 } else {
                     Intent intent = new Intent();
                     intent.putExtra("nick", newNick);
                     setResult(RESULT_OK, intent);
+                    finish();
                 }
             }
         });
