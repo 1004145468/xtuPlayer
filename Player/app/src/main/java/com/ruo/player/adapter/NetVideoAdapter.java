@@ -9,7 +9,9 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ruo.player.R;
+import com.ruo.player.Utils.DataBaseUtils;
 import com.ruo.player.Utils.PLGT;
+import com.ruo.player.entries.HistoryVideoModel;
 import com.ruo.player.entries.NetVideoModel;
 
 import java.util.List;
@@ -87,6 +89,9 @@ public class NetVideoAdapter extends BaseAdapter {
 
         @OnClick(R.id.item_netvideo_play)
         public void playVideo() {
+            //存入数据库
+            HistoryVideoModel historyVideoModel = new HistoryVideoModel(model.getTitle(), model.getVideopath(), model.getImgPath());
+            DataBaseUtils.saveVideoModel(mContext,historyVideoModel);
             PLGT.gotoMediaPlayActivity(mContext, model.getTitle(), model.getVideopath(), 0);
         }
     }

@@ -92,7 +92,7 @@ public class NetUtils {
                 //保留最新的一份数据
                 DataBaseUtils.clearNetVideo(context);
                 //存数据库,断网可以读取本地
-                DataBaseUtils.saveVideoModel(context, datas);
+                DataBaseUtils.saveVideoModels(context, datas);
                 handler.post(new Runnable() {
                     @Override
                     public void run() {

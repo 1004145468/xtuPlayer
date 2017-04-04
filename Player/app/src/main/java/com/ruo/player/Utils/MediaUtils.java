@@ -45,7 +45,7 @@ public class MediaUtils {
         //覆盖原来的数据
         DataBaseUtils.clearLocalVideo(context);
         //存入新的数据
-        DataBaseUtils.saveVideoModel(context,mDatas);
+        DataBaseUtils.saveVideoModels(context,mDatas);
         return mDatas;
     }
 

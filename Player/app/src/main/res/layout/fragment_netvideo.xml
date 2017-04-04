@@ -19,8 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp">
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
 
         <ListView
             android:id="@+id/netvideo_list"
@@ -28,7 +28,7 @@
             android:layout_height="match_parent"
             android:overScrollMode="never"
             android:divider="@null"
-            android:dividerHeight="3dp"/>
+            android:dividerHeight="8dp"/>
 
     </com.ruo.player.views.RefreshLayout>
 
