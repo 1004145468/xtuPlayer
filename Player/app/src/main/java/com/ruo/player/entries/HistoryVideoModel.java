@@ -2,6 +2,7 @@ package com.ruo.player.entries;
 
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Administrator on 2017/4/4.
@@ -16,6 +17,8 @@ public class HistoryVideoModel extends RealmObject {
     private int status = NOTEDITABLE;
 
     private String title;
+
+    @PrimaryKey
     private String videopath;
     private String imgPath;
 

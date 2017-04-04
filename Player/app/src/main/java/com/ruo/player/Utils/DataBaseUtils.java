@@ -58,7 +58,11 @@ public class DataBaseUtils {
         mRealm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                realm.copyToRealm(model);
+                try {
+                    realm.copyToRealm(model);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         mRealm.close();
