@@ -25,7 +25,7 @@
         <activity
             android:name=".MediaPlayActivity"
             android:configChanges="screenSize|orientation|keyboard|keyboardHidden"
-            android:launchMode="singleInstance" />
+            android:launchMode="standard" />
         <activity
             android:name=".UserCenterActivity"
             android:screenOrientation="portrait" />

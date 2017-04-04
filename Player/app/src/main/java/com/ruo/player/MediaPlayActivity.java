@@ -177,7 +177,7 @@ public class MediaPlayActivity extends BaseActivity {
         seekTo = getIntent().getIntExtra("seekTo", 0);
 
         //MediaView
-        mVideoView.setAspectRatio(IRenderView.AR_ASPECT_FIT_PARENT); //设置视频展示的样式
+        mVideoView.setAspectRatio(IRenderView.AR_ASPECT_WRAP_CONTENT); //设置视频展示的样式
         mVideoView.setOnPreparedListener(new IMediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(IMediaPlayer iMediaPlayer) {
