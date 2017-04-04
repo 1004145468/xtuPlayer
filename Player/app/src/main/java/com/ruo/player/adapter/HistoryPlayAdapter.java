@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ruo.player.R;
+import com.ruo.player.Utils.DataBaseUtils;
 import com.ruo.player.Utils.DialogUtils;
 import com.ruo.player.Utils.PLGT;
 import com.ruo.player.base.BaseViewHolder;
@@ -94,7 +95,7 @@ public class HistoryPlayAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @OnClick(R.id.item_netvideo_delete)
         public void deleteVideo() {  //删除记录
-            DialogUtils.showToast(mContext, "删除记录");
+            DataBaseUtils.clearHistoryVideo(mContext, model);
         }
 
 
