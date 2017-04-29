@@ -14,6 +14,8 @@ import com.ruo.player.Utils.NetUtils;
 import com.ruo.player.Utils.PLGT;
 import com.ruo.player.base.BaseActivity;
 
+import tv.danmaku.ijk.media.player.IjkMediaPlayer;
+
 /**
  * Created by Administrator on 2017/3/31.
  */
@@ -32,6 +34,10 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //初始化ijkPlayer
+        IjkMediaPlayer.loadLibrariesOnce(null);
+        IjkMediaPlayer.native_profileBegin("libijkplayer.so");
+        
         initPermission();
         initTimer();
         initDatas();

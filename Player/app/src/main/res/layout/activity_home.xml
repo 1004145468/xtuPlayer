@@ -46,7 +46,7 @@
         app:placeholderImageScaleType="centerCrop"
         app:roundAsCircle="true"
         app:roundingBorderColor="@color/color2"
-        app:roundingBorderWidth="1dp" />
+        app:roundingBorderWidth="1.5dp" />
 
 
 </RelativeLayout>
