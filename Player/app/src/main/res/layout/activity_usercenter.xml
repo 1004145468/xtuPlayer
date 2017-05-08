@@ -187,6 +187,7 @@
         android:background="@drawable/select_loginbtn_bg"
         android:text="退　出"
         android:textColor="@color/color1"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="invisible"/>
 
 </RelativeLayout>

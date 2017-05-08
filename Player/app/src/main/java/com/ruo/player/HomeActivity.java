@@ -97,8 +97,7 @@ public class HomeActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_USERINFO && resultCode == RESULT_OK) {
-            PLGT.gotoLoginActivity(this);
-            finish();
+            mHeadView.setImageURI("");
         }
     }
 }

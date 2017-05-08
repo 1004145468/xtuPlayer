@@ -24,6 +24,7 @@ import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 
 import static cn.bmob.v3.BmobRealTimeData.TAG;
+import static cn.bmob.v3.BmobUser.logOut;
 
 /**
  * Created by YL on 2017/2/27.
@@ -60,6 +61,16 @@ public class BmobUtils {
         player.setEmail(username);
         player.setHeadUrl(fileUrl);
         player.signUp(listener);
+    }
+
+    /**
+     * 退出当前用户
+     */
+    public static void clearUserInfo(){
+        Player currentUser = getCurrentUser();
+        if(currentUser != null){
+            currentUser.logOut();
+        }
     }
 
     /**

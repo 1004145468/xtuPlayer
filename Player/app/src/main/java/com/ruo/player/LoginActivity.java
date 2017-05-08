@@ -11,11 +11,10 @@ import android.widget.TextView;
 import com.ruo.player.Utils.BmobUtils;
 import com.ruo.player.Utils.DialogUtils;
 import com.ruo.player.Utils.PLGT;
-import com.ruo.player.base.BaseActivity;
+import com.ruo.player.base.BaseTitleBackActivity;
 import com.ruo.player.entries.Player;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
@@ -24,7 +23,7 @@ import cn.bmob.v3.listener.SaveListener;
  * Created by Administrator on 2017/4/3.
  */
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseTitleBackActivity {
 
     @BindView(R.id.login_forgetpsw)
     TextView forgetPswView;
@@ -82,8 +81,16 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
         forgetPswView.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_login;
+    }
+
+    @Override
+    public String getBarTitle() {
+        return "登录";
     }
 }

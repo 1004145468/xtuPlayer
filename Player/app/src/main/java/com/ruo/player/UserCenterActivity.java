@@ -1,9 +1,8 @@
 package com.ruo.player;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -31,25 +30,26 @@ public class UserCenterActivity extends BaseTitleBackActivity {
     SimpleDraweeView mHeadView;
     @BindView(R.id.userinfo_nick)
     TextView mNickView;
+    @BindView(R.id.userinfo_exit)
+    Button exitBtn;
 
     private Player currentUser;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onResume() {
+        super.onResume();
         currentUser = BmobUtils.getCurrentUser();
         if (currentUser != null) {
             mHeadView.setImageURI(currentUser.getHeadUrl());
             mNickView.setText(currentUser.getNick());
+            exitBtn.setVisibility(View.VISIBLE);
         }
     }
-
 
     @OnClick(R.id.userinfo_head)
     public void loginOrHeadUpdateHead() {
         if (currentUser == null) {  //注册
-            setResult(RESULT_OK, null);
-            finish();
+            PLGT.gotoLoginActivity(this);
         } else { //更改头像
             PLGT.gotoImagePickActivity(this);
         }
@@ -82,7 +82,8 @@ public class UserCenterActivity extends BaseTitleBackActivity {
      */
     @OnClick(R.id.userinfo_exit)
     public void exit() {
-        setResult(RESULT_OK, null);
+        BmobUtils.clearUserInfo();
+        setResult(RESULT_OK);
         finish();
     }
 
