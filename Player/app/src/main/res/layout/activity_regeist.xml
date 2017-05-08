@@ -10,8 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="60dp"
         android:orientation="horizontal">
 
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="账号"
-            android:textColor="@color/color4"
+            android:textColor="#e5f8f8fa"
             android:textSize="18sp" />
 
         <EditText
@@ -28,9 +28,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:hint="请输入邮箱"
+            android:textColorHint="#d4d4d4"
             android:paddingLeft="10dp"
             android:singleLine="true"
-            android:textColor="@color/color5"
+            android:textColor="#d4d4d4"
             android:textSize="16sp" />
 
     </LinearLayout>
@@ -38,8 +39,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
@@ -47,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="密码"
-            android:textColor="@color/color4"
+            android:textColor="#e5f8f8fa"
             android:textSize="18sp" />
 
         <EditText
@@ -56,10 +57,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:hint="请输入密码"
+            android:textColorHint="#d4d4d4"
             android:inputType="textPassword"
             android:paddingLeft="10dp"
             android:singleLine="true"
-            android:textColor="@color/color5"
+            android:textColor="#d4d4d4"
             android:textSize="16sp" />
 
     </LinearLayout>
@@ -67,8 +69,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
@@ -76,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="密码"
-            android:textColor="@color/color4"
+            android:textColor="#e5f8f8fa"
             android:textSize="18sp" />
 
         <EditText
@@ -85,10 +87,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:hint="请重复密码"
+            android:textColorHint="#d4d4d4"
             android:inputType="textPassword"
             android:paddingLeft="10dp"
             android:singleLine="true"
-            android:textColor="@color/color5"
+            android:textColor="#d4d4d4"
             android:textSize="16sp" />
 
     </LinearLayout>

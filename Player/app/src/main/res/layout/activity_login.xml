@@ -26,7 +26,8 @@
             android:paddingRight="10dp"
             android:paddingTop="10dp"
             android:textSize="16sp"
-            android:text="账号" />
+            android:text="账号"
+            android:textColor="#e5f8f8fa"/>
 
         <View
             android:layout_width="1dp"
@@ -44,7 +45,8 @@
             android:hint="注册邮箱"
             android:textSize="16sp"
             android:singleLine="true"
-            android:textColor="#aaffffff" />
+            android:textColor="#aaffffff"
+            android:textColorHint="#d4d4d4"/>
 
     </LinearLayout>
 
@@ -68,7 +70,8 @@
             android:paddingRight="10dp"
             android:paddingTop="10dp"
             android:textSize="16sp"
-            android:text="密码" />
+            android:text="密码"
+            android:textColor="#e5f8f8fa"/>
 
         <View
             android:layout_width="1dp"
@@ -85,6 +88,7 @@
             android:background="@android:color/transparent"
             android:hint="注册邮箱"
             android:inputType="textPassword"
+            android:textColorHint="#d4d4d4"
             android:textSize="16sp"
             android:singleLine="true"
             android:textColor="#aaffffff" />
